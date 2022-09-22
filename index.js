@@ -116,16 +116,12 @@ app.post('/sendmail' , (req,res) => {
   
   `
 
-}
-).then(function(data) {
-  res.redirect('/')
-},function(error) {
-  res.redirect("/")
-  
-}).catch(err);
-
+}).then(function(data) {
+  console.log(data);
+}, function(error) {
+  console.error(error);
+});
 })
-
 
 
 const list = require('./routes/listing')

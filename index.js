@@ -29,6 +29,16 @@ app.get('/mortgageCalculator', async(req,res) =>{
 
 })
 
+app.get('/success', async(req,res) =>{
+  res.render("../views/pages/success")
+
+})
+
+app.get('/error', async(req,res) =>{
+  res.render("../views/pages/error")
+
+})
+
 app.get('/filter', async (req, res) => {
 const {state, area, propertyType, nofBedroom:nof_Bedroom, status, minPrice:min_price, maxPrice:max_price} = req.query
 
@@ -96,11 +106,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/show/:propertyCode', async (req, res) => {
+  const rest = 0
   const uid = req.params.propertyCode
   const oneData = await Property.findOne({ propertyCode: uid });
  
 
-  res.render("../views/pages/property", {oneData} )
+  res.render("../views/pages/property", {oneData, rest} )
   
 })
 
@@ -145,15 +156,21 @@ app.post('/sendmail' , (req,res) => {
   `
 
 }).then(function(data) {
-  console.log(data);
+  console.log(data)
+ res.render("../views/pages/success")
 }, function(error) {
-  console.error(error);
+  console.log(error)
+ res.render("../views/pages/error")
+
+  
 });
 })
 
 
+
 const list = require('./routes/listing')
 const { ifError } = require('assert')
+const { get } = require('http')
 app.use('/api/list', list)
 
 app.listen(port, () => {

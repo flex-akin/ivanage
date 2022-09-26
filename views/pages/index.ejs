@@ -40,43 +40,68 @@
         <p class="testimonialH2">Africa's Trusted Property Marketplace</p>
     </div>
     <br>
-      <form method="post" action="/filter" >
+      <form id="filterSubmit" >
     <div class="row">
 
-        <div class="col-lg-1  "></div>
-        <div class="col-lg-2 "> 
+        
+        <div class="col-lg-1 "> 
           <label for="exampleInputPassword1" class="form-label" style="color: white; font-size:13px; font-weight:500; " >State</label><br>
           <select class="form-select form-select-md mb-3 filter rounded-0" id="slct1" name="state" onchange="populate(this.id,'slct2')">
-            <option value="" >Pick State</option>
+            <option value="" ></option>
             <option value="Lagos">Lagos</option>
             <option value="Abuja">Abuja</option>
-          
-            
           </select>
-      </div>
-   
-   
-        <div class="col-lg-2 ">
+        </div>
+        <div class="col-lg-1 ">
           <label  class="form-label" style="color: white; font-size:13px; font-weight:500; ">Area</label><br>
         
           <select class="form-select form-select-md mb-3 filter rounded-0" aria-label=".form-select-lg example" id="slct2" name="area" >
           </select>
 
         </div>
+        <div class="col-lg-1">
+          <label  class="form-label" style="color: white; font-size:13px; font-weight:500; ">Bedrooms</label><br>
+          <input class="filter" name="nofBedroom" id="nofBedroom" type="number" >
+        </div>
+        <div class="col-lg-1 "> 
+          <label for="exampleInputPassword1" class="form-label" style="color: white; font-size:13px; font-weight:500; " >Status</label><br>
+          <select class="form-select form-select-md mb-3 filter rounded-0"  id="status" name="status">
+            <option value="" ></option>
+            <option value="Off Plan">Off Plan</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+
+        <div class="col-lg-2 "> 
+          <label for="exampleInputPassword1" class="form-label" style="color: white; font-size:13px; font-weight:500; " >Property Type</label><br>
+          <select class="form-select form-select-md mb-3 filter rounded-0" id="propertyType" name="propertyType">
+            <option value=""></option>
+            <option value="Apartment">Apartment</option>
+            <option value="Studio">Studio</option>
+            <option value="Terrace">Terrace</option>
+            <option value="Semi Detached">Semi Detached</option> 
+            <option value="Penthouse">Penthouse</option>
+            <option value="Detached">Detached</option>
+            <option value="Town House">Town House</option>
+            <option value="Maisonette">Maisonette</option>
+          </select>
+        </div>
+
         <div class="col-lg-2 ">
           <label  class="form-label" style="color: white; font-size:13px; font-weight:500; ">Min. Price (₦)</label><br>
-          <input class="filter" name="minPrice" type="number" value="0">
+          <input class="filter" name="minPrice" id="minPrice" type="number" value="0">
          
         </div>
-        <div class="col-lg-2">
+     
+         <div class="col-lg-2">
           <label  class="form-label" style="color: white; font-size:13px; font-weight:500; ">Max. Price (₦)</label><br>
-          <input class="filter" name="maxPrice" type="number" >
+          <input class="filter" name="maxPrice" id="maxPrice" type="number" >
         </div>
         <div class="col-lg-2">
           <label class="form-label" style="color: white; font-size:13px; font-weight:500; visibility: hidden; " >Max. Price</label> <br>
           <input class="btn btn-success filter1" style="color: white; font-size:13px; font-weight:500; " type="submit" value="Submit">
         </div>
-        <div class="col-lg-1"></div>
+      
       </div>
 
 
@@ -86,10 +111,10 @@
   </section><!-- End Testimonials Section -->
 
 
-<!-- ======= Team Section ======= -->
 
 <section id="team" class="team section-bg">
   <div class="container" data-aos="fade-up">
+    
 
     <%if ( allData.length == 0) { %>
       <div class="row">
@@ -97,12 +122,10 @@
       <div class="col-sm-12 col-lg-4">
         <div class="alert-message alert-message-danger">
             <h4>
-                </h4>
-            <p>
-               <strong>
+              <strong>
                 Property Unavailable
                </strong>
-              </p>
+          
         </div>
     </div>
     <div class="col-lg-4"></div>
@@ -116,6 +139,7 @@
       <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
         <div class="member">
           <div class="member-img">
+            <a href="/show/<%= allData[i].propertyCode %>" style="color: black;">
 
             <div id="carouselExampleIndicators<%= [i] %>" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-indicators">
@@ -159,11 +183,21 @@
 
             </div>
           </div>
-        <a href="/show/<%= allData[i].propertyCode %>" style="color: black;">
 
           <div class="member-info">
             <div class="under">
-              <h2 id="price"> ₦<%= allData[i].propertyPrice %> </h2>
+              <h2 id="price<%= [i]%>" class="price">  </h2>
+              <script>
+
+                  var x = " <%= allData[i].propertyPrice %> " 
+                function numberWithCommas(x) {
+                 a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                 b = `₦${a}`
+                 return b.replace(/\s/g, '')
+                  }
+
+                    document.getElementById("price<%= [i]%>").innerText = numberWithCommas(x)
+              </script>
               <div  id="icons-block">
               
                  <i class="fa-solid fa-bed"> <%= allData[i].numberOfBedroom %></i> &nbsp;
@@ -186,11 +220,12 @@
 
       <% } %>
      
-        </div>
+        </div
       </div>
     
  
-</section><!-- End Team Section -->
+</section>
+<!-- End Team Section -->
 
 
 

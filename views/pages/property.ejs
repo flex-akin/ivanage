@@ -28,10 +28,10 @@
             <div class="row">
       
               <div  id="icons-block">
-                <i class="fa-solid fa-location-dot"> <%= oneData.state %>, <%= oneData.area %> </i> &nbsp; &#183; &nbsp;
-                 <i class="fa-solid fa-bed"> <%= oneData.numberOfBedroom %></i> &nbsp; &#183; &nbsp;
-                <i class="fa-solid fa-bath"> <%= oneData.quantityAvailableUnits %></i> &nbsp; &#183; &nbsp;
-                <i class="fa-solid fa-house"> <%= oneData.propertyType%></i> &nbsp;
+                <i class="fa-solid fa-location-dot"></i> <font><%= oneData.state %>, <%= oneData.area %> </font>  &nbsp; &#183; &nbsp;
+                 <i class="fa-solid fa-bed"> </i> <%= oneData.numberOfBedroom %>&nbsp; &#183; &nbsp;
+                <i class="fa-solid fa-bath"> </i> <%= oneData.quantityAvailableUnits %> &nbsp; &#183; &nbsp;
+                <i class="fa-solid fa-house"> </i> <%= oneData.propertyType%>&nbsp;
 
               </div>
             </div>
@@ -51,6 +51,7 @@
                       <div class="carousel-item">
                         <img src="https://drive.google.com/uc?export=view&id=<%= oneData.photos[2] %>" style="height: 450px; width:450px;" alt="...">
                       </div>
+                     
                       <div class="carousel-item">
                         <img src="https://drive.google.com/uc?export=view&id=<%= oneData.photos[3] %>" style="height: 450px; width:450px;" alt="...">
                       </div>
@@ -73,9 +74,20 @@
                 <span>Property Price</span>
               </div>
               <div class="row">
-                <h1 style="font-weight: 700;">
+                <h1 id="pricer" style="font-weight: 700;">
                   ₦<%= oneData.propertyPrice%>
                 </h1>
+                <script>
+
+                  var x = " <%= oneData.propertyPrice %> " 
+                function numberWithCommas(x) {
+                 a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                 b = `₦${a}`
+                 return b.replace(/\s/g, '')
+                  }
+
+                    document.getElementById("pricer").innerText = numberWithCommas(x)
+              </script>
     
               </div>
             
@@ -95,7 +107,7 @@
         <a class="request1"  data-bs-toggle="modal" data-bs-target="#exampleModal"> Schedule Inspection</a>
       </div>
       <div class="col-lg-3 col-sm-12 col-md-12">
-        <a class="request2" href=""> Apply For Financing</a>
+        <a class="request2" data-bs-toggle="modal" data-bs-target="#exampleModal2"> Apply For Financing</a>
       </div>
       <div class="col-lg-3 col-sm-12 col-md-12" id="re"></div>
 
@@ -107,7 +119,7 @@
         <a class="request3" data-bs-toggle="modal" data-bs-target="#exampleModal1"> Buy Now</a>
       </div>
       <div class="col-lg-3 col-sm-12 col-md-12" >
-        <a class="request4" href=""> Use Mortgage Calculator</a>
+        <a class="request4" href="/mortgageCalculator"> Mortgage Calculator</a>
       </div>
       <div class="col-lg-3 col-sm-12 col-md-12" id="re"></div>
 
@@ -123,8 +135,6 @@
 
     <div class="row" >
      <h2 style="font-weight: 600;">Description</h2>
-     
-
     </div>
 
   </div>
@@ -134,43 +144,11 @@
     
         <div class="row" >
          <h2 style="font-weight: 600;">Property Features</h2>
-         
-    
+        
         </div>
     
       </div>
-      <section>
-        <div class="container" data-aos="fade-up">
-          <hr>
-          
-              <div class="row" >
-               <h2 style="font-weight: 600;">Mortgage Partners</h2>
-               
-          
-              </div>
-              <div>
-                <div class="col-lg-3">
-                  <img src="/assets/img/logo/imperial_logo.png" style="padding-top:30px;" class=" rounded float-start" alt="...">
-                </div>
-                <div class="col-lg3">
-                  <img src="/assets/img/logo/brent-logo.png" style="height: 20%; width:20%; padding-top: 10px; " class=" rounded float-start" alt="...">
-                </div>
-
-              </div>
-          
-            </div>
-
-      </section>
-     
-          <section>
-            <div class=" container" data-aos="fade-up">
-              <hr>
-                  <div class="row" >
-                   <h2 style="font-weight: 600;">Mortgage Calculator</h2>
-                  </div>
-                </div>
-          </section>
-       
+  
 
 
  <section>
@@ -207,6 +185,11 @@
             </div>
 
             <div class="mb-3">
+              <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">PREFERRED SCHEDULE TIME</label>
+              <input type="time" class="form-control" name="time" id="recipient-name" style="height: 40px; width: 100%; " required>
+            </div>
+
+            <div class="mb-3">
               <label for="message-text" class="col-form-label" style="font-weight: 600; font-size: 15px;">COMMENTS</label>
               <textarea class="form-control" id="message-text" name="comment" style="height: 80px; width: 100%; " ></textarea>
             </div>
@@ -215,7 +198,6 @@
        
         </div>
           </form>
-          <button type="button" class="btn " style="background-color: red; color:white; font-size: 10px; font-weight: 500; " data-bs-dismiss="modal">CLOSE</button>
 
         </div>
       </div>
@@ -258,6 +240,37 @@
         <div class="modal-footer">
           <button type="button" class="btn " style="background-color: red; color:white; font-size: large; font-weight: 500; " data-bs-dismiss="modal">CLOSE</button>
           <button type="button" class="btn " style="background-color: #17a2b8; color:white; font-size: large; font-weight: 500;">SUBMIT REQUEST</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ </section>
+
+
+ <section>
+ 
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 900; font-size: 20px;">Mortgage Partners</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"    
+        
+          <div class="container" data-aos="fade-up">
+          
+                <div>
+                  <div class="col-lg-3">
+                    <img src="/assets/img/logo/imperial_logo.png" style="padding-top:30px;" class=" rounded float-start" alt="...">
+                  </div>
+                </div>
+              </div>
+        
+          
+         
+        <div class="modal-footer">
+          <button type="button" class="btn " style="background-color: red; color:white; font-size: large; font-weight: 500; " data-bs-dismiss="modal">CLOSE</button>
         </div>
       </div>
     </div>

@@ -198,7 +198,7 @@
               <textarea class="form-control" id="message-text" name="comment" style="height: 80px; width: 100%; " ></textarea>
             </div>
         <div class="modal-footer"> 
-          <button type="submit" class="btn " style="background-color: #17a2b8; color:white; font-size: 10px; font-weight: 500;">SUBMIT REQUEST</button>
+          <button type="submit" class="btn " style="background-color: #17a2b8; color:white; font-size: large; font-weight: 500;">SUBMIT REQUEST</button>
        
         </div>
           </form>
@@ -220,31 +220,30 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 900; font-size: 20px;">Buy Now Form</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form method="post" action="/sendmailer" >
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">FULL NAME</label>
-              <input type="text" class="form-control" id="recipient-name" style="height: 40px; width: 100%; " >
+              <input type="text" class="form-control" id="recipient-name" style="height: 40px; width: 100%; " name="name">
             </div>
 
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">EMAIL ADDRESS</label>
-              <input type="email" class="form-control" id="recipient-name" style="height: 40px; width: 100%; " >
+              <input type="email" class="form-control" id="recipient-name" style="height: 40px; width: 100%; " name="email" >
             </div>
 
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">PHONE NUMBER</label>
-              <input class="form-control" id="recipient-name"   type="tel" style="height: 40px; width: 100%; " minlength="11" maxlength="14">
+              <input class="form-control" id="recipient-name"   type="tel" style="height: 40px; width: 100%; " name="phonenumber" minlength="11" maxlength="14">
             </div>
-
+            <div class="modal-footer">
+              <button type="submit" class="btn " style="background-color: #17a2b8; color:white; font-size: large; font-weight: 500;">SUBMIT REQUEST</button>
+            </div>
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn " style="background-color: red; color:white; font-size: large; font-weight: 500; " data-bs-dismiss="modal">CLOSE</button>
-          <button type="button" class="btn " style="background-color: #17a2b8; color:white; font-size: large; font-weight: 500;">SUBMIT REQUEST</button>
-        </div>
+       
       </div>
     </div>
   </div>

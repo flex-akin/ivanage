@@ -55,6 +55,7 @@ const {state, area, propertyType, nofBedroom:nof_Bedroom, status, minPrice:min_p
 
     if (!area) {
       if (!state) {
+        
         const allData = await Property.find({ 
           status: status,
           propertyType: propertyType,
@@ -134,10 +135,7 @@ app.post('/sendmail' , (req,res) => {
 
   const receivers  =[
   {
-    email: 'flexyakin1997@gmail.com'
-  },
-  {
-    email: 'akintolafelix2121@gmail.com'
+    email: 'property@ivantage.africa'
   }
 ]
 
@@ -167,6 +165,48 @@ app.post('/sendmail' , (req,res) => {
 })
 
 
+app.post('/sendmailer' , (req,res) => {
+  const name = req.body.name
+  const email = req.body.email
+  const phonenumber = req.body.phonenumber
+  
+
+  const client = Sib.ApiClient.instance
+  const apiKey = client.authentications['api-key']
+  apiKey.apiKey = process.env.API_KEY
+  const  tranEmailApi = new Sib.TransactionalEmailsApi()
+  const sender = {
+  email: 'felix.akintola@ivantage.africa'
+}
+
+  const receivers  =[
+  {
+    email: 'property@ivantage.africa'
+  }
+]
+
+  tranEmailApi.sendTransacEmail({
+  sender,
+  to: receivers,
+  subject: 'Schedule Inspection Request', 
+  textContent : `
+  name : ${name}
+  Email: ${email}
+  Phone Number: ${phonenumber}
+ 
+  
+  `
+
+}).then(function(data) {
+  console.log(data)
+ res.render("../views/pages/success")
+}, function(error) {
+  console.log(error)
+ res.render("../views/pages/error")
+
+  
+});
+})
 
 const list = require('./routes/listing')
 const { ifError } = require('assert')
@@ -176,3 +216,7 @@ app.use('/api/list', list)
 app.listen(port, () => {
   console.log(`app is listening on port ${port}`)
 })
+
+
+
+

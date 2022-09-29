@@ -8,6 +8,8 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const Property = require('./model/Property')
 const Sib = require('sib-api-v3-sdk')
+const list = require('./routes/listing')
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -208,9 +210,10 @@ app.post('/sendmailer' , (req,res) => {
 });
 })
 
-const list = require('./routes/listing')
-const { ifError } = require('assert')
-const { get } = require('http')
+
+
+
+
 app.use('/api/list', list)
 
 app.listen(port, () => {

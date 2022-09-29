@@ -1,69 +1,104 @@
+<!-- ======= Header ======= -->
+<header id="header" class="d-flex align-items-center">
+  <div class="container d-flex align-items-center justify-content-between">
+    <h1 class="logo">
+      <a href="/index.html"
+        ><img src="/./assets/img/logo/iVantage_logo.png" alt="ivantage logo"
+      /></a>
+    </h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li>
+          <a
+            class="nav-link scrollto active"
+            href="https://www.ivantage.africa/index.html"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            href="https://www.ivantage.africa/about.html"
+            >About Us</a
+          >
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            href="https://www.ivantage.africa/solutions.html"
+            >Our Solutions</a
+          >
+        </li>
+        <li class="dropdown">
+          <a href=""
+            ><span>Our Team</span> <i class="bi bi-chevron-down"></i
+          ></a>
+          <ul>
+            <li>
+              <a href="https://www.ivantage.africa/board.html">Board Members</a>
+            </li>
+            <li>
+              <a href="https://www.ivantage.africa/management.html"
+                >Management</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            href="https://www.ivantage.africa/index.html#partners"
+            >Our Partners</a
+          >
+        </li>
+        <li class="dropdown">
+          <a><span>Property</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="/">Property Listing</a></li>
+            <li><a href="/mortgageCalculator">Mortgage Calculator</a></li>
+          </ul>
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            href="https://www.ivantage.africa/faq.html"
+            >FAQ</a
+          >
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+    <!-- .navbar -->
+    <script src="/assets/js/ejs.js"></script>
 
-      <h1 class="logo"><a href="/index.html"><img src="/./assets/img/logo/iVantage_logo.png" alt="ivantage logo"></a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
+    <script>
+      $(document).ready(function () {
+        $("#filterSubmit").on("submit", function (event) {
+          event.preventDefault();
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="https://www.ivantage.africa/index.html">Home</a></li>
-          <li><a class="nav-link scrollto" href="https://www.ivantage.africa/about.html">About Us</a></li>
-          <li><a class="nav-link scrollto" href="https://www.ivantage.africa/solutions.html">Our Solutions</a></li>
-          <li class="dropdown"><a href=""><span>Our Team</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="https://www.ivantage.africa/board.html">Board Members</a></li>
-                  <li><a href="https://www.ivantage.africa/management.html">Management</a></li>
-              </ul>
-                 
-          </li>
-          <li><a class="nav-link scrollto" href="https://www.ivantage.africa/index.html#partners">Our Partners</a></li>
-          <li class="dropdown"><a><span>Property</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="/">Property Listing</a></li>
-                  <li><a href="/mortgageCalculator">Mortgage Calculator</a></li>
-              </ul>
-                 
-          </li>
-          <li><a class="nav-link scrollto" href="https://www.ivantage.africa/faq.html">FAQ</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-  <script src="/assets/js/ejs.js"></script>
+          let state = $("#slct1").val();
+          let area = $("#slct2").val();
+          let propertyType = $("#propertyType").val();
+          let nofBedroom = $("#nofBedroom").val();
+          let status = $("#status").val();
+          let minPrice = $("#minPrice").val();
+          let maxPrice = $("#maxPrice").val();
 
-<script>
-  $(document).ready(function(){
-    $("#filterSubmit").on("submit", function(event){
-      event.preventDefault();
+          $.ajax({
+            url: `/filter?state=${state}&area=${area}&minPrice=${minPrice}&maxPrice=${maxPrice}&propertyType=${propertyType}&nofBedroom=${nofBedroom}&status=${status}`,
+            method: "get",
+            contentType: "application/json",
 
-      let state = $("#slct1").val();
-      let area = $("#slct2").val();
-      let propertyType = $("#propertyType").val();
-      let nofBedroom = $("#nofBedroom").val();
-      let status = $("#status").val();
-      let minPrice = $("#minPrice").val();
-      let maxPrice = $("#maxPrice").val();
-
-      $.ajax({
-        url: `/filter?state=${state}&area=${area}&minPrice=${minPrice}&maxPrice=${maxPrice}&propertyType=${propertyType}&nofBedroom=${nofBedroom}&status=${status}`,
-        method: "get",
-        contentType : "application/json",
-          
-      
-        success : function(res){
-       $('#team').html(res);
-        }
-
-      })
-    })
-  })
-
-
-
-
-
-</script>
-    </div>
-  </header><!-- End Header -->
+            success: function (res) {
+              $("#team").html(res);
+            },
+          });
+        });
+      });
+    </script>
+  </div>
+</header>
+<!-- End Header -->

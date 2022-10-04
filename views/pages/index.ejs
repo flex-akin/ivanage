@@ -3,6 +3,8 @@
 <head>
   
   <%- include('../partials/head'); %>
+  <%- include('../partials/header'); %>
+
   <script>
           function populate(s1,s2){
       var s1 = document.getElementById(s1);
@@ -46,6 +48,7 @@
         contentType: "application/json",
 
         success: function (res) {
+          console.log(res)
           $("#team").html(res);
         },
       });
@@ -56,7 +59,6 @@
 <body>
 
   <!-- ======= Header ======= -->
-    <%- include('../partials/header'); %>
   <!-- ======= Testimonials Section ======= -->
   <section class="testimonials">
     <div class="container" data-aos="zoom-in">
@@ -115,13 +117,13 @@
 
         <div class="col-lg-2 ">
           <label  class="form-label" style="color: white; font-size:13px; font-weight:500; ">Min. Price (₦)</label><br>
-          <input class="filter" name="minPrice" id="minPrice" type="number" value="0">
+          <input class="filter number-separator" name="minPrice" id="minPrice" type="text" value="0">
          
         </div>
      
          <div class="col-lg-2">
           <label  class="form-label" style="color: white; font-size:13px; font-weight:500; ">Max. Price (₦)</label><br>
-          <input class="filter" name="maxPrice" id="maxPrice" type="number" >
+          <input class="filter number-separator" name="maxPrice" id="maxPrice" type="text" >
         </div>
         <div class="col-lg-2">
           <label class="form-label" style="color: white; font-size:13px; font-weight:500; visibility: hidden; " >Max. Price</label> <br>

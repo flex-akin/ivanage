@@ -6,7 +6,7 @@ const Property = require('../model/Property')
 
 router.post('/', async(req, res) =>{
 
-    
+
     const property = new Property({
 
     propertyCode:  req.body.propertyCode, // req.body. is shorthand for {type: req.body.}
@@ -16,6 +16,7 @@ router.post('/', async(req, res) =>{
     area: req.body.area,
     propertyType: req.body.propertyType,
     numberOfBedroom: req.body.numberOfBedroom,
+    numberOfWashroom: req.body.numberofWashroom,
     quantityAvailableUnits: req.body.quantityAvailableUnits,
     propertyPrice: req.body.propertyPrice,
     propertySize: req.body.propertySize,
@@ -33,8 +34,30 @@ router.post('/', async(req, res) =>{
 
 })
 
-router.post
 
+// router.post('/', async(req, res) =>{
 
+//     const photo = req.body.photos
+//     console.log("api",photo)
+    
+//     res.send(photo)
+
+// })
+
+router.post('/login', (req, res) => {
+    const password = req.body.password
+
+    if (password == "admin") {
+    return res.render("../views/pages/admin_portal", ans ={ answer: ""})
+    
+    }
+    if (password != "admin") {
+    return  res.render("../views/pages/admin_login", ans = {answer: "wrong password"});
+    }
+} )
+
+router.get('/xyuegdghfhsjska-dj', (req, res) => {
+    res.render("../views/pages/admin_portal")
+})
 module.exports = router;
 

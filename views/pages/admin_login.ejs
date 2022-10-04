@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <%- include('../partials/head'); %>
+  <%- include('../partials/header'); %>
+
+
+  
+
+
+<section  id="team" class="team section-bg" style="padding-bottom: 300px; padding-top: 50px;" >
+<div class="container text-center">
+
+  
+        <form class="form-signin" action="/api/list/login" method="post" >
+       
+          <img class="mb-4" src="../../assets/img/logo/iVantage_logo.png" alt="" width="210" height="60">
+          <h1 class="h3 mb-3 font-weight-normal" style="color: #17a2b8; font-weight: 700;">Admin Portal Sign-In </h1>
+          <% if(ans.answer == "wrong password"){ %>
+            
+            <center>
+              <div class=" d-flex justify-content-center align-items-center" style="color: red; background-color: rgb(245, 207, 207); width: fit-content;" > Wrong Password, Try Again</div>
+              %>
+           <% } else{ %>  
+               <p></p>
+           <% } %>
+           <br>
+           <center>
+            <div>
+              <label for="inputPassword" class="sr-only">Password</label>
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" style="width: 300px; height:50px;" required>
+    
+            </div>
+
+           </center>
+            
+            </center>
+        <br>
+         
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+      
+</div>
+</section>
+<!-- End Team Section -->
+
+
+
+
+
+
+  <!-- ======= Footer ======= -->
+  <%- include('../partials/footer'); %>
+</body>
+
+</html>
+
+ 
+
+

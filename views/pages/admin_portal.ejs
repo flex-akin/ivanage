@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <%- include('../partials/head'); %>
+  <%- include('../partials/header'); %>
+
+  <script>
+    $(document).ready(function () {
+      $("#regForm").on("submit", function (event) {
+        event.preventDefault();
+
+        const convert = (string) => {
+
+const new_string = string.replace("https://drive.google.com/file/d/", "")
+const another = new_string.replace("/view?usp=sharing","")
+return another
+}
+
+      let propertyCode = $("#propertyCode").val();
+      let developer = $("#developer").val();
+      let propertyName = $("#propertyName").val();
+      let state = $("#state").val();
+      let area = $("#area").val();
+      let propertyType = $("#propertyType").val();
+      let numberOfBedroom = $("#numberOfBedroom").val();
+      let numberOfWashroom = $("#numberOfWashroom").val();
+      let quantityAvailableUnits = $("#quantityAvailableUnits").val();
+      let propertyPrice = $("#propertyPrice").val();
+      let propertySize = $("#propertySize").val();
+      let propertyFeatures = $("#propertyFeatures").val();
+      let status = $("#status").val();
+      let deliveryDate = $("#deliveryDate").val();
+      let titleType = $("#titleType").val();
+      let buildingPlanApproval = $("#buildingPlanApproval").val();
+      var photos = [];
+$(".photoClass").each(function(){
+ photos.push(convert($(this).val()));
+});
+
+      
+
+        $.ajax({
+          url: `/api/list/`,
+          method: "POST",
+          contentType: "application/json",
+          data : JSON.stringify({
+            propertyCode: propertyCode,
+            developer: developer,
+            propertyName: propertyName,
+            state: state,
+            area: area,
+            propertyType: propertyType,
+            numberOfBedroom: numberOfBedroom,
+            numberOfWashroom: numberOfWashroom,
+            quantityAvailableUnits: quantityAvailableUnits,
+            propertyPrice: propertyPrice,
+            propertySize: propertyPrice,
+            propertyFeatures: propertyFeatures,
+            status: status,
+            deliveryDate: deliveryDate,
+            titleType: titleType,
+            buildingPlanApproval: buildingPlanApproval,
+            photos : photos
+          }),
+  
+          success: function (res) {
+          console.log("ajaxresponse",res)
+          },
+        });
+      });
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      var max_fields      = 10; //maximum input boxes allowed
+      var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+      var add_button      = $(".add_field_button"); //Add button ID
+     
+      var x = 1; //initlal text box count
+    
+    
+     $(add_button).click(function(e){ //on add input button click
+          e.preventDefault();
+          if(x < max_fields){ //max input box allowed
+    
+             
+              $(wrapper).append(`
+              <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Photos</label>
+    <input type="text" class="photoClass form-control" name="titleType" style="height: 40px;"> 
+    <a href="#" class="remove_field"><i class="fa-solid fa-minus"></i></a></div>
+  </div>
+              
+              
+              `); //add input box
+              x++; 
+      }
+      });
+     
+      $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+         
+      e.preventDefault(); 
+      $(this).parent('div').remove(); 
+      x--;
+      })
+  });
+    
+    </script>
+
+
+
+  
+
+
+<section style="padding-top:100px ;" id="team" class="testimonial section-bg">
+<div class="container">
+
+  <center>
+    <h1 class="h3 mb-3 font-weight-normal" style="color: #17a2b8; font-weight: 700;">Admin Portal Sign-In </h1>
+    
+  </center>
+
+  <div class="form">
+
+    <form id="regForm" >
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Property Code</label>
+    <input type="text" id="propertyCode" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Developer</label>
+    <input type="text" id="developer" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Property Name</label>
+    <input type="text" id="propertyName" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">State</label>
+    <input type="text" id="state" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Area</label>
+    <input type="text" id="area" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">property Type</label>
+    <input type="text" id="propertyType" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Number of Bedrooms</label>
+    <input type="text" id="numberOfBedroom" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Number of Washrooms</label>
+    <input type="text" id="numberOfWashrooms" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Quantity Available Units</label>
+    <input type="text" id="quantityAvailableUnits" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Property Price</label>
+    <input type="number" id="propertyPrice" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Property Size</label>
+    <input type="text" id="propertySize" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Property Features</label>
+    <input type="text" id="propertyFeatures" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Status</label>
+    <input type="text" id="status" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Delivery Date</label>
+    <input type="text" id="deliveryDate" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">titleType</label>
+    <input type="text" id="titleType" style="height: 40px;" class="form-control">
+  </div>
+
+  <div class="col-lg-4 col-md-4">
+    <label for="exampleInputPassword1" class="form-label">Building Plan Approval</label>
+    <input type="text" id="buildingPlanApproval" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+
+<div class="row justify-content-center input_fields_wrap">
+  <div class="col-lg-4 col-md-4 ">
+    <label for="exampleInputPassword1" class="form-label">Photos</label>
+    <input type="text" class="photoClass form-control" name="titleType" style="height: 40px;"> 
+    <i class="fa-solid fa-plus add_field_button"></i>
+  </div>
+
+
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-1">
+  <input type="submit" class="btn btn-success" value="submit">
+  </div>
+</div>
+
+    </form>
+  </div>
+</div>
+
+ 
+
+</section>
+<!-- End Team Section -->
+
+
+  <!-- ======= Footer ======= -->
+  <%- include('../partials/footer'); %>
+</body>
+
+</html>
+
+ 
+
+

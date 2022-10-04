@@ -74,31 +74,12 @@
     <!-- .navbar -->
     <script src="/assets/js/ejs.js"></script>
 
-    <script>
-      $(document).ready(function () {
-        $("#filterSubmit").on("submit", function (event) {
-          event.preventDefault();
+  
 
-          let state = $("#slct1").val();
-          let area = $("#slct2").val();
-          let propertyType = $("#propertyType").val();
-          let nofBedroom = $("#nofBedroom").val();
-          let status = $("#status").val();
-          let minPrice = $("#minPrice").val();
-          let maxPrice = $("#maxPrice").val();
 
-          $.ajax({
-            url: `/filter?state=${state}&area=${area}&minPrice=${minPrice}&maxPrice=${maxPrice}&propertyType=${propertyType}&nofBedroom=${nofBedroom}&status=${status}`,
-            method: "get",
-            contentType: "application/json",
 
-            success: function (res) {
-              $("#team").html(res);
-            },
-          });
-        });
-      });
-    </script>
+
+
   </div>
 </header>
 <!-- End Header -->

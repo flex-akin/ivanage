@@ -8,6 +8,7 @@ const propertySchema = new mongoose.Schema({
     area: String,
     propertyType: String,
     numberOfBedroom: String,
+    numberOfwashroom: String,
     quantityAvailableUnits: String,
     propertyPrice: Number,
     propertySize: String,

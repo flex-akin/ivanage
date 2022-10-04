@@ -3,13 +3,225 @@
 <head>
   <%- include('../partials/head'); %>
 
-  
+  <style>
+    .mortInput {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: blue
+}
+input:focus {
+  border-color: green
+}
+  </style>
 
 
 </head>
 <body>
   <!-- ======= Header ======= -->
     <%- include('../partials/header'); %>
+<section class="container">
+  <div class="p-5 mb-4 bg-light rounded-3">
+          
+      <div class="row g-3" >
+       <h2 style="font-weight: 600;">Mortgage Calculator</h2>
+    
+        <div class="col-md-12 col-lg-12 g-5">
+          <form id="fSubmit">
+        
+                <div class="row g-5" id="mortgage" >
+                
+                  <div>
+                    <div class="row ">
+    
+                      <div class=" col-lg-6">
+                        <label style="font-weight: 700; font-size: larger;">Net Monthly Income</label>
+                        <input type="text" class="number-separator mortInput col-lg-12" id="monthlyIncome" style="height: 50px;"  required>
+                      </div>
+                      <br>
+                      <div class="col-lg-6">
+                        <label style="font-weight: 700; font-size: larger;" >Additional Monthly Income</label>
+                        <input type="text" class="number-separator mortInput col-lg-12" id="addyMonthlyIncome" style="height: 50px;"  required>
+                      </div>
+    
+                    </div>
+                    <br>
+    
+                
+                    <div class= "row">
+                        <div class="col-lg-6">
+                    <label style="font-weight: 700; font-size: larger;"> Are you borrowing with a partner</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="flexRadio" checked id="flexRadio1">
+                      <label class="form-check-label" for="flexRadio2">
+                        Yes
+                      </label>
+                    </div>
+                  
+                    <div class="form-check ">
+                      <input class="form-check-input" type="radio" name="flexRadio" id="flexRadio2" >
+                      <label class="form-check-label" for="flexRadio2">
+                        No
+                      </label>
+                    </div>
+                </div>
+    
+                    <br>
+    
+                    <div id="partner" class="col-lg-6">
+                      <label style="font-weight: 700; font-size: larger;">Partner's Net Montly Income</label>
+                      <input type="text" class="number-separator mortInput col-lg-12" id="partnerIncome" style="height: 50px;"  >
+                    </div>
+                  </div>
+    <br>
+    
+                
+                  <div class="row">
+    
+                    
+                    <div class="col-lg-3">
+                      <label style="font-weight: 700; font-size: larger;" >Age</label> <br>
+                      <input type="number" class="mortInput col-lg-12" id="age" style="height: 50px;"  required>
+                    </div>
+
+
+                      <div class="col-lg-3">
+                        <label style="font-weight: 700; font-size: larger;" >Tenor</label> <br>
+                        <input type="number" class=" mortInput col-lg-12" id="tenure" style="height: 50px;"  required>
+                      </div>
+                    
+    
+                    <div class=" col-lg-6">
+                      <label style="font-weight: 700; font-size: larger;" >Down Payment</label>
+                      <input type="text" class="number-separator mortInput col-lg-12" id="downPayment" style="height: 50px;"  required>
+                    </div>
+                  </div>
+    
+                    <br>
+                    <div class="row">
+                      <div class="col-lg-6">
+
+    
+                    <label style="font-weight: 700; font-size: larger;"> Do you have other loan Obligation</label>
+    
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" checked id="flexRadioDefault1">
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        Yes
+                      </label>
+                    </div>
+                    
+    
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+                      <label class="form-check-label" for="flexRadioDefault2">
+                        No
+                      </label>
+                    </div>
+                    </div>
+                    <br>
+    
+                    <div id="borrowObligation" class="col-lg-6">
+                      <label style="font-weight: 700; font-size: larger;" >Monthly Repayment Obligation</label>
+                      <input type="text" class="number-separator mortInput col-lg-12" id="debt" style="height: 50px;"  >
+                    </div>
+                    </div>
+    
+                 
+                  
+                  <div style="display: flex; justify-content:center; padding-top: 20px;">
+                    <button class="btn " style="background-color: #17a2b8; color:white; font-size: large; font-weight: 500;" type="submit">Submit</button>
+                  </div>
+                </div>
+              </form>
+              </div>
+              </div>      
+  </div>
+</section>
+
+<section class="container">
+  <center>Results</center>
+<div class="row">
+  <div style="background-color: rgb(246, 248, 248); border: 2px solid white;" class="col-lg-6 col-md-6">
+    <h4 style="font-size: 20px;"> <strong>Maximum Property Value</strong> </h4>
+    <h3 class="d-flex flex-row-reverse" style="color: #19ae6b; font-size: 30px; font-weight: 500;" id="maxpv">₦0.00 </h3>
+
+
+  </div>
+  <div style="background-color: rgb(246, 248, 248); border: 2px solid white;" class="col-lg-6 col-md-6">
+    <h4 style="font-size: 20px;"> <strong>Monthly Repayment</strong></h4>
+    <h3 class="d-flex flex-row-reverse" style="color: #19ae6b; font-size: 30px; font-weight: 500;" id="monthly">₦0.00 </h3>
+    
+    
+
+  </div>
+
+</div>
+<div class="row">
+  <div style="background-color: rgb(246, 248, 248); border: 2px solid white;" class="col-lg-6 col-md-6">
+    <h4 style="font-size: 20px;"> <strong>Interest Rate</strong></h4>
+    <h3 class="d-flex flex-row-reverse" style="color: #19ae6b;font-size: 30px; font-weight: 500;"> 19%</h3>
+
+    
+
+  </div>
+  <div style="background-color: rgb(246, 248, 248); border: 2px solid white;" class="col-lg-6 col-md-6">
+    <h4 style="font-size: 20px;"> <strong>Tenor</strong>
+    <button type="button" class="btn" id="btnshow" data-delay='{"show":"5000", "hide":"3000"}' data-bs-toggle="tooltip" data-bs-placement="top" title="Tenor will be used deirectly as inputed if it is less than (60 - Age), else (60 - Age) is uesed a tenor  ">
+      <i class="fa-sharp fa-solid fa-circle-info "></i> 
+    </button>
+    </h4>
+    <h3 class="d-flex flex-row-reverse" style="color: #19ae6b; font-size: 30px; font-weight: 500;" id="tenor"> ₦0.00</h3>
+
+
+  </div>
+
+</div>
+</section>
+<!---
+  
+<section class="container">
+  <div class="row g-3">
+    <div class="col-md-5 col-lg-4 order-md-last">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text" style="color: #19ae6b;">Results</span>
+      </h4>
+   
+
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="" style="color: #19ae6b; font-weight: 600;" >Maximum Property Value</span>
+        <span class="badge rounded-pill " style="background-color: #19ae6b; color:white; font-size: large; font-weight: 500;" id="maxpv"> </span>
+      </h4>
+
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="" style="color: #19ae6b; font-weight: 600;">Monthly Repayment</span>
+        <span class="badge rounded-pill" style="background-color: #19ae6b; color:white; font-size: large; font-weight: 500;" id="monthly"> </span>
+      </h4>
+
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="" style="color: #19ae6b; font-weight: 600;" >Interest Rate</span>
+        <span class="badge rounded-pill" style="background-color: #19ae6b; color:white; font-size: large; font-weight: 500;"> 19%</span>
+      </h4>
+
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+        <span class="" style="color: #19ae6b; font-weight: 600;">Tenor</span> 
+      </button>
+        <button type="button" class="btn" id="btnshow" data-delay='{"show":"5000", "hide":"3000"}' data-bs-toggle="tooltip" data-bs-placement="top" title="if the tenor provided is less than the age subtracted by age cap of 60years, your tenor will be used">
+      <i class="fa-sharp fa-solid fa-circle-info "></i> 
+    </button>
+    
+
+        </div>
+       <div>
+       <span class="badge rounded-pill" style="background-color: #19ae6b; color:white; font-size: large; font-weight: 500;" id="tenor">  </span>    
+       </div> 
+    
+      </h4>
+
+
+ 
+    </div>
+</section>
 
 <section class="container">
           
@@ -27,7 +239,7 @@
 
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="" style="color: #19ae6b; font-weight: 600;" >Maximum Property Value</span>
-        <span class="badge rounded-pill" style="background-color: #19ae6b; color:white; font-size: large; font-weight: 500;" id="maxpv"> </span>
+        <span class="badge rounded-pill " style="background-color: #19ae6b; color:white; font-size: large; font-weight: 500;" id="maxpv"> </span>
       </h4>
 
       <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -41,8 +253,18 @@
       </h4>
 
       <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="" style="color: #19ae6b; font-weight: 600;">Tenor</span>
-        <span class="badge rounded-pill" style="background-color: #19ae6b; color:white; font-size: large; font-weight: 500;" id="tenor"> </span>
+        <div>
+        <span class="" style="color: #19ae6b; font-weight: 600;">Tenor</span> 
+      </button>
+        <button type="button" class="btn" id="btnshow" data-delay='{"show":"5000", "hide":"3000"}' data-bs-toggle="tooltip" data-bs-placement="top" title="if the tenor provided is less than the age subtracted by age cap of 60years, your tenor will be used">
+      <i class="fa-sharp fa-solid fa-circle-info "></i> 
+    </button>
+
+        </div>
+       <div>
+       <span class="badge rounded-pill" style="background-color: #19ae6b; color:white; font-size: large; font-weight: 500;" id="tenor">  </span>    
+       </div> 
+    
       </h4>
 
 
@@ -59,12 +281,12 @@
                 <div class="row">
 
                   <div class="form-floating col-lg-6">
-                    <input type="number" class="form-control" id="monthlyIncome" style="height: 50px;" placeholder="name@example.com" required>
-                    <label for="floatingInput">Net Monthly Income</label>
+                    <input type="text" class="form-control number-separator" id="monthlyIncome" style="height: 50px;"  required>
+                    <label for="floatingPassword">Net Monthly Income</label>
                   </div>
                   <br>
                   <div class="form-floating col-lg-6">
-                    <input type="number" class="form-control" id="addyMonthlyIncome" style="height: 50px;" placeholder="Password" required>
+                    <input type="text" class="form-control number-separator" id="addyMonthlyIncome" style="height: 50px;"  required>
                     <label for="floatingPassword">Additional Monthly Income</label>
                   </div>
 
@@ -93,7 +315,7 @@
                 <br>
 
                 <div id="partner" class="form-floating col-lg-6">
-                  <input type="number" class="form-control" id="partnerIncome" style="height: 50px;"  placeholder="Password">
+                  <input type="text" class="form-control number-separator" id="partnerIncome" style="height: 50px;"  >
                   <label for="floatingPassword">Partner's Net Montly Income</label>
                 </div>
               </div>
@@ -104,13 +326,13 @@
 
                 
                 <div class="form-floating col-lg-6">
-                  <input type="number" class="form-control" id="age" style="height: 50px;" placeholder="Password" required>
+                  <input type="number" class="form-control" id="age" style="height: 50px;"  required>
                   <label for="floatingPassword">Age</label>
                 </div>
                 <br>
 
                 <div class="form-floating col-lg-6">
-                  <input type="number" class="form-control" id="downPayment" style="height: 50px;" placeholder="Password" required>
+                  <input type="text" class="form-control number-separator" id="downPayment" style="height: 50px;"  required>
                   <label for="floatingPassword">Down Payment</label>
                 </div>
               </div>
@@ -141,8 +363,16 @@
                 <br>
 
                 <div id="borrowObligation" class="form-floating col-lg-6">
-                  <input type="number" class="form-control" id="debt" style="height: 50px;"  placeholder="Password">
+                  <input type="text" class="form-control number-separator" id="debt" style="height: 50px;"  >
                   <label for="floatingPassword">Monthly Repayment Obligation</label>
+                </div>
+                </div>
+
+                <div class="row">
+
+                <div class="form-floating col-lg-6">
+                  <input type="number" class="form-control" id="tenure" style="height: 50px;"  required>
+                  <label for="floatingPassword">Tenor</label>
                 </div>
                 </div>
               </div>
@@ -160,8 +390,6 @@
 
           </div>
     </section>
-        </div>
-</section>
 
 
 
@@ -169,6 +397,7 @@
 
 
 
+--->
 
 
 
@@ -222,34 +451,39 @@
 
         const getLoanTerm = () => {
         const age = Number((document.getElementById('age').value))
+        const tenure = Number((document.getElementById('tenure').value))
+
+
          
          if(age <= 17) return -1;
          if(age >= 60) return -1;
          const t = 60 - age
         const test = t > 20 ? 20 : t
-        document.getElementById('tenor').innerText = `${t}years`
+        const tenTest = tenure < test ? tenure : test
 
+        document.getElementById('tenor').innerText = `${tenTest}years`
 
-         return test
+         return tenTest
 
         }
         const getTotalMonthly = () => {
-          const partnerIncome = Number(document.getElementById('partnerIncome').value)
-          const monthlyIncome = Number(document.getElementById('monthlyIncome').value)
-          const addyMonthlyIncome = Number(document.getElementById('addyMonthlyIncome').value)  
+          const partnerIncome = Number((document.getElementById('partnerIncome').value).replace(/\,/g,''))
+          const monthlyIncome = Number((document.getElementById('monthlyIncome').value).replace(/\,/g,''))
+          const addyMonthlyIncome = Number((document.getElementById('addyMonthlyIncome').value).replace(/\,/g,''))
           const sum = partnerIncome + monthlyIncome + addyMonthlyIncome
           return sum
         }
+        console.log("ans", partnerIncome)
 
 
         const getTotalDebt = () => {
-          const debt = Number(document.getElementById('debt').value)
+          const debt = Number((document.getElementById('debt').value).replace(/\,/g,''))
           return debt
 
         }
 
         const downPayment = () => {
-            const downPayment = Number(document.getElementById("downPayment").value)
+            const downPayment = Number((document.getElementById("downPayment").value).replace(/\,/g,''))
             return downPayment
 
         }
@@ -279,8 +513,15 @@
               const monthly = loanAmount / loanTerm
               const downPay = downPayment()
               const affordability = Number(loanAmount) + Number(downPay)
-              document.getElementById('maxpv').innerText = `₦${affordability.toFixed(2)}`
-              document.getElementById('monthly').innerText = `₦${monthly.toFixed(2)}`
+              
+              function numberWithCommas(x) {
+                 a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                 b = `${a}`
+                 return b.replace(/\s/g, '')
+                  }
+
+              document.getElementById('maxpv').innerText = `₦${numberWithCommas(affordability.toFixed(2))}`
+              document.getElementById('monthly').innerText = `₦${numberWithCommas(monthly.toFixed(2))}`
 
               
               return affordability
@@ -290,117 +531,6 @@
        </script>
 
 
- <section>
- 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 900; font-size: 20px;">Schedule Inspection Form</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form method="post" action="/sendmail">
-
-
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">FULL NAME</label>
-              <input type="text" class="form-control" id="recipient-name" name="name" style="height: 40px; width: 100%; " required>
-            </div>
-
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">EMAIL ADDRESS</label>
-              <input type="email" class="form-control" id="recipient-name" name="email" style="height: 40px; width: 100%; " required >
-            </div>
-
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">PHONE NUMBER</label>
-              <input class="form-control" id="recipient-name"  name="phonenumber" type="tel" style="height: 40px; width: 100%; " required minlength="11" maxlength="14">
-            </div>
-
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">PREFERRED SCHEDULE DATE</label>
-              <input type="date" class="form-control" name="date" id="recipient-name" style="height: 40px; width: 100%; " required>
-            </div>
-
-            <div class="mb-3">
-              <label for="message-text" class="col-form-label" style="font-weight: 600; font-size: 15px;">COMMENTS</label>
-              <textarea class="form-control" id="message-text" name="comment" style="height: 80px; width: 100%; " ></textarea>
-            </div>
-        <div class="modal-footer"> 
-          <button type="submit" class="btn " style="background-color: #17a2b8; color:white; font-size: 10px; font-weight: 500;">SUBMIT REQUEST</button>
-       
-        </div>
-          </form>
-          <button type="button" class="btn " style="background-color: red; color:white; font-size: 10px; font-weight: 500; " data-bs-dismiss="modal">CLOSE</button>
-
-        </div>
-      </div>
-    </div>
-  </div>
- </section>
-
-
-      <!-- ======= Section Modal ======= -->
-
-
- <section>
- 
-  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 900; font-size: 20px;">Buy Now Form</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">FULL NAME</label>
-              <input type="text" class="form-control" id="recipient-name" style="height: 40px; width: 100%; " >
-            </div>
-
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">EMAIL ADDRESS</label>
-              <input type="email" class="form-control" id="recipient-name" style="height: 40px; width: 100%; " >
-            </div>
-
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label" style="font-weight: 600; font-size: 15px;">PHONE NUMBER</label>
-              <input class="form-control" id="recipient-name"   type="tel" style="height: 40px; width: 100%; " minlength="11" maxlength="14">
-            </div>
-
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn " style="background-color: red; color:white; font-size: large; font-weight: 500; " data-bs-dismiss="modal">CLOSE</button>
-          <button type="button" class="btn " style="background-color: #17a2b8; color:white; font-size: large; font-weight: 500;">SUBMIT REQUEST</button>
-        </div>
-      </div>
-    </div>
-  </div>
- </section>
-
-
-<script>
-  let items = document.querySelectorAll('.carousel .carousel-item')
-  
-  items.forEach((el) => {
-      const minPerSlide = 4
-      let next = el.nextElementSibling
-      for (var i=1; i<minPerSlide; i++) {
-          if (!next) {
-              // wrap carousel by using first child
-            next = items[0]
-          }
-          let cloneChild = next.cloneNode(true)
-          el.appendChild(cloneChild.children[0])
-          next = next.nextElementSibling
-      }
-  })
-  
-      
-       </script>
     
       <!-- ======= Footer ======= -->
   <%- include('../partials/footer'); %>

@@ -111,7 +111,7 @@ app.set("view engine", "ejs");
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 
 app.get("/", (req, res) => {
-  res.render("pages/admin_portal");
+  res.render("pages/index");
 });
 
 

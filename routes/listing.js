@@ -44,6 +44,10 @@ router.post('/', async(req, res) =>{
 
 // })
 
+router.get("/admin", (req, res) => {
+    res.render("../views/pages/admin_login", ans = {answer: ""});
+  });
+
 router.post('/login', (req, res) => {
     const password = req.body.password
 

@@ -45,28 +45,28 @@ router.post('/', async(req, res) =>{
 // })
 
 router.get("/admin", (req, res) => {
-    res.render("../views/pages/admin_login", ans = {answer: ""});
+    res.render("../views/pages/adminLogin", ans = {answer: ""});
   });
 
 router.post('/login', (req, res) => {
     const password = req.body.password
 
     if (password == "admin") {
-    return res.render("../views/pages/admin_portal", ans ={ answer: ""})
+    return res.render("../views/pages/adminPortal", ans ={ answer: ""})
     
     }
     if (password != "admin") {
-    return  res.render("../views/pages/admin_login", ans = {answer: "wrong password"});
+    return  res.render("../views/pages/adminLogin", ans = {answer: "wrong password"});
     }
 } )
 
 router.get('/xyuegdghfhsjska-dj', (req, res) => {
-    res.render("../views/pages/admin_portal")
+    res.render("../views/pages/adminPortal")
 })
 router.get('/grehdsjhskjefi-io', async (req, res) => {
   const allData = await Property.find();
 
-    res.render("../views/pages/admin_data", {allData})
+    res.render("../views/pages/adminData", {allData})
 })
 
 router.get("/delete/:id", async (req, res) => {
@@ -79,7 +79,7 @@ router.get("/delete/:id", async (req, res) => {
     const allData = await Property.find();
 
   
-    res.render("../views/pages/admin_data", { allData});
+    res.render("../views/pages/adminData", { allData});
   });
 module.exports = router;
 

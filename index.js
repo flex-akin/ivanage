@@ -48,8 +48,8 @@ app.get("/filter", async (req, res) => {
     maxPrice: max_price,
   } = req.query;
 
-  const minPrice = parseInt((min_price).replace(/\,/g, ''));
-  var maxPrice = parseInt((max_price).replace(/\,/g, ''));
+  const minPrice = Number((min_price).replace(/\,/g, ''));
+  var maxPrice = Number((max_price).replace(/\,/g, ''));
   var nofBedroom = parseInt(nofBedroom);
 
   // const minPrice = parseInt(min_price)

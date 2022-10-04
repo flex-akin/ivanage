@@ -59,5 +59,23 @@ router.post('/login', (req, res) => {
 router.get('/xyuegdghfhsjska-dj', (req, res) => {
     res.render("../views/pages/admin_portal")
 })
+router.get('/grehdsjhskjefi-io', async (req, res) => {
+  const allData = await Property.find();
+
+    res.render("../views/pages/admin_data", {allData})
+})
+
+router.get("/delete/:id", async (req, res) => {
+
+    const uid = req.params.id;
+    const result = await Property.deleteOne({propertyCode: uid});
+    
+
+
+    const allData = await Property.find();
+
+  
+    res.render("../views/pages/admin_data", { allData});
+  });
 module.exports = router;
 

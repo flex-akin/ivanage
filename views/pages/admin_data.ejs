@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <%- include('../partials/head'); %>
+  <%- include('../partials/header'); %>
+<style>
+    table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+</style>
+
+  
+
+
+<section  id="team" class="team section-bg" style=" padding-top: 100px;" >
+<div class="container text-center">
+
+        <table>
+            <tr>
+            <th>Property Code</th>
+            <th>Developer</th>
+            <th>Property Name</th>
+            <th>State</th>
+            <th>area</th>
+            <th>Number of Bedrooms</th>
+            <th>Number of Washrooms</th>
+            <th>Number of propertyPrice</th>
+            <th>Number of propertyFeatures</th>
+            <th>Number of Status</th>
+
+
+            
+
+
+
+            </tr>
+    <% for(var i=0; i < allData.length; i++) { %>
+
+            <tr>
+            <td> <%= allData[i].propertyCode %> </td>
+            <td> <%= allData[i].developer %></td>
+            <td> <%= allData[i].propertyName %></td>
+            <td> <%= allData[i].state %></td>
+            <td> <%= allData[i].area %></td>
+            <td> <%= allData[i].numberOfBedroom %></td>
+            <td> <%= allData[i].numberOfWashroom %></td>
+            <td> <%= allData[i].propertyPrice %></td>
+            <td> <%= allData[i].propertyFeatures %></td>
+            <td> <%= allData[i].status %></td>
+            <td> <a href=" /api/list/delete/<%= allData[i].propertyCode %> ">  <i class="fa-sharp fa-solid fa-trash" style="color: red;"></i></a></td>
+            </tr>
+        <% } %>
+
+           
+          </table>
+     
+      
+</div>
+</section>
+<!-- End Team Section -->
+
+
+
+
+
+
+  <!-- ======= Footer ======= -->
+  <%- include('../partials/footer'); %>
+</body>
+
+</html>
+
+ 
+
+

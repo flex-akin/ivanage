@@ -115,7 +115,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/admin", (req, res) => {
-  res.render("pages/admin_login", ans = {answer: ""});
+  res.render("../views/pages/admin_login", ans = {answer: ""});
 });
 
 app.get("/show/:propertyCode", async (req, res) => {

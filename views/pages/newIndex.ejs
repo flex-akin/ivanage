@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <%- include('../partials/head'); %>
+  <%- include('../partials/header'); %>
+
+  <script>
+          function populate(s1,s2){
+      var s1 = document.getElementById(s1);
+      var s2 = document.getElementById(s2);
+      s2.innerHTML = "";
+      
+      if(s1.value == "Lagos"){
+          var optionArray = ["|Any","Abijo GRA|Abijo GRA", "Abraham Adesanya|Abraham Adesanya","Ibeju Lekki|Ibeju Lekki","Ibeshe|Ibeshe", "Ikate Elegushi|Ikate Elegushi","Lakowe|Lakowe","LBS Ajah|LBS Ajah","Lekki|Lekki","Ogudu GRA|Ogudu GRA","Orchid Road|Orchid Road","Sangotedo|Sangotedo", "VGC|VGC", "Yaba|Yaba"];
+      } else if(s1.value == "Abuja"){
+          var optionArray = ["|Any","Guzape|Guzape","Life Camp|Life Camp","Lugbe|Lugbe"];
+      }
+      for(var option in optionArray){
+          var pair = optionArray[option].split("|");
+          var newOption = document.createElement("option");
+          console.log("value", )
+          newOption.value = pair[0];
+          newOption.innerHTML = pair[1];
+          s2.options.add(newOption);
+      }
+  }
+  
+      
+  </script>
+
+<script>
+  $(document).ready(function () {
+    $("#filterSubmit").on("submit", function (event) {
+      event.preventDefault();
+
+      let state = $("#slct1").val();
+      let area = $("#slct2").val();
+      let propertyType = $("#propertyType").val();
+      let nofBedroom = $("#nofBedroom").val();
+      let status = $("#status").val();
+      let minPrice = $("#minPrice").val();
+      let maxPrice = $("#maxPrice").val();
+
+      $.ajax({
+        url: `/filter?state=${state}&area=${area}&minPrice=${minPrice}&maxPrice=${maxPrice}&propertyType=${propertyType}&nofBedroom=${nofBedroom}&status=${status}`,
+        method: "get",
+        contentType: "application/json",
+
+        success: function (res) {
+          console.log(res)
+          $("#team").html(res);
+        },
+      });
+    });
+  });
+</script>
+
+<script>
+    $(document).ready(function () {
+      $("#next").on("click", function (event) {
+    const nPage = "<%= pages.nextPage %>"
+  
+        $.ajax({
+          url: `/api/list/lists/${nPage}`,
+          method: "get",
+          contentType: "application/json",
+  
+          success: function (res) {
+            console.log(res)
+            $("#team").html(res);
+          },
+        });
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $("#previuos").on("click", function (event) {
+    const pPage = "<%= pages.prevPage %>"
+  
+        $.ajax({
+          url: `/api/list/lists/${pPage}`,
+          method: "get",
+          contentType: "application/json",
+  
+          success: function (res) {
+            console.log(res)
+            $("#team").html(res);
+          },
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <!-- ======= Header ======= -->
+  <!-- ======= Testimonials Section ======= -->
+  <section class="testimonials">
+    <div class="container" data-aos="zoom-in">
+
+      <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
+        <p class="testimonialH1">Find Your Dream Home</p>
+        <p class="testimonialH2">Africa's Trusted Property Marketplace</p>
+    </div>
+    <br>
+      <form id="filterSubmit" >
+    <div class="row">
+
+        
+        <div class="col-lg-1 "> 
+          <label for="exampleInputPassword1" class="form-label" style="color: white; font-size:13px; font-weight:500; " >State</label><br>
+          <select class="form-select form-select-md mb-3 filter rounded-0" id="slct1" name="state" onchange="populate(this.id,'slct2')">
+            <option value="" ></option>
+            <option value="Lagos">Lagos</option>
+            <option value="Abuja">Abuja</option>
+          </select>
+        </div>
+        <div class="col-lg-1 ">
+          <label  class="form-label" style="color: white; font-size:13px; font-weight:500; ">Area</label><br>
+        
+          <select class="form-select form-select-md mb-3 filter rounded-0" aria-label=".form-select-lg example" id="slct2" name="area" >
+          </select>
+
+        </div>
+        <div class="col-lg-1">
+          <label  class="form-label" style="color: white; font-size:13px; font-weight:500; " required>Bedrooms</label><br>
+          <input class="filter" name="nofBedroom" id="nofBedroom" type="number" >
+        </div>
+        <div class="col-lg-1 "> 
+          <label for="exampleInputPassword1" class="form-label" style="color: white; font-size:13px; font-weight:500; " required>Status</label><br>
+          <select class="form-select form-select-md mb-3 filter rounded-0"  id="status" name="status">
+            <option value="" ></option>
+            <option value="Off Plan">Off Plan</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+
+        <div class="col-lg-2 "> 
+          <label for="exampleInputPassword1" class="form-label" style="color: white; font-size:13px; font-weight:500; " required>Property Type</label><br>
+          <select class="form-select form-select-md mb-3 filter rounded-0" id="propertyType" name="propertyType">
+            <option value=""></option>
+            <option value="Apartment">Apartment</option>
+            <option value="Studio">Studio</option>
+            <option value="Terrace">Terrace</option>
+            <option value="Semi Detached">Semi Detached</option> 
+            <option value="Penthouse">Penthouse</option>
+            <option value="Detached">Detached</option>
+            <option value="Town House">Town House</option>
+            <option value="Maisonette">Maisonette</option>
+          </select>
+        </div>
+
+        <div class="col-lg-2 ">
+          <label  class="form-label" style="color: white; font-size:13px; font-weight:500; ">Min. Price (₦)</label><br>
+          <input class="filter number-separator" name="minPrice" id="minPrice" type="text" value="0">
+         
+        </div>
+     
+         <div class="col-lg-2">
+          <label  class="form-label" style="color: white; font-size:13px; font-weight:500; ">Max. Price (₦)</label><br>
+          <input class="filter number-separator" name="maxPrice" id="maxPrice" type="text" >
+        </div>
+        <div class="col-lg-2">
+          <label class="form-label" style="color: white; font-size:13px; font-weight:500; visibility: hidden; " >Max. Price</label> <br>
+          <input class="btn btn-success filter1" style="color: white; font-size:13px; font-weight:500; " type="submit" value="Submit">
+        </div>
+      
+      </div>
+
+
+      </form>
+     
+    </div>
+  </section><!-- End Testimonials Section -->
+
+
+
+<section id="team" class="team section-bg">
+  <div class="container" data-aos="fade-up">
+    
+
+    <%if ( pages.docs.length == 0) { %>
+      <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-sm-12 col-lg-4">
+        <div class="alert-message alert-message-danger">
+            <h4>
+              <strong>
+                Property Unavailable
+               </strong>
+          
+        </div>
+    </div>
+    <div class="col-lg-4"></div>
+
+  </div>
+      <% } %>
+
+    <div class="row">
+  <% for(var i=0; i < pages.docs.length; i++) { %>
+     
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+        <div class="member">
+          <div class="member-img">
+            <a href="/show/<%= pages.docs[i].propertyCode %>" style="color: black;">
+
+            <div id="carouselExampleIndicators<%= [i] %>" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide-to="1" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide-to="2" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide-to="3" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide-to="4" aria-label="Slide 4"></button>
+              </div>
+              <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                  <img src="https://drive.google.com/uc?export=view&id=<%= pages.docs[i].photos[0] %>" style="height: 450px; width:450px;" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://drive.google.com/uc?export=view&id=<%= pages.docs[i].photos[1] %>" style="height: 450px; width:450px;" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://drive.google.com/uc?export=view&id=<%= pages.docs[i].photos[2] %>" style="height: 450px; width:450px;" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://drive.google.com/uc?export=view&id=<%= pages.docs[i].photos[3] %>" style="height: 450px; width:450px;" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="https://drive.google.com/uc?export=view&id=<%= pages.docs[i].photos[4] %>" style="height: 450px; width:450px;" alt="...">
+                </div>
+              
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            <div class="top-left"><%= pages.docs[i].propertyType %></div>
+            <div class="top-right"><%= pages.docs[i].status %> </div>
+
+
+
+            </div>
+          </div>
+
+          <div class="member-info">
+            <div class="under">
+              <h2 id="price<%= [i]%>" class="price">  </h2>
+              <script>
+
+                  var x = " <%= pages.docs[i].propertyPrice %> " 
+                function numberWithCommas(x) {
+                 a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                 b = `₦${a}`
+                 return b.replace(/\s/g, '')
+                  }
+
+                    document.getElementById("price<%= [i]%>").innerText = numberWithCommas(x)
+              </script>
+              <div  id="icons-block">
+              
+                 <i class="fa-solid fa-bed"> <%= pages.docs[i].numberOfBedroom %></i> &nbsp;
+                <i class="fa-solid fa-bath"> <%= pages.docs[i].numberOfBedroom %></i> &nbsp;
+              </div>
+            </div>
+
+            <div class="under1">
+              <span> <%= pages.docs[i].propertyName %> </span> &nbsp; &#183; &nbsp; 
+              <span> <%= pages.docs[i].developer %> </span> 
+  
+            </div>
+         
+         
+          </div>
+      </a>
+
+        </div>
+      </div>
+
+      <% } %>
+     
+        </div
+      </div>
+    
+      <div>
+        <button id="previuos" class="btn btn-warning"> Previous</button>
+        
+        <button id="next" class="btn btn-success"> Next</button>
+        
+      </div>
+</section>
+<!-- End Team Section -->
+
+<script>
+    
+
+    x = '<%= pages.prevPage %>'
+    y = '<%= pages.nextPage %>'
+
+    if (x == "") {
+        but = document.getElementById('previuos')
+    but.style.display = 'none'
+    }
+    if (y == "") {
+        but = document.getElementById('next')
+    but.style.display = 'none'
+    }
+
+
+   
+ </script>
+
+
+
+
+  <!-- ======= Footer ======= -->
+  <%- include('../partials/footer'); %>
+</body>
+
+</html>
+
+ 
+
+

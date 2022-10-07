@@ -16,7 +16,7 @@ router.post('/', async(req, res) =>{
     area: req.body.area,
     propertyType: req.body.propertyType,
     numberOfBedroom: req.body.numberOfBedroom,
-    numberOfWashroom: req.body.numberofWashroom,
+    numberOfWashroom: req.body.numberOfWashroom,
     quantityAvailableUnits: req.body.quantityAvailableUnits,
     propertyPrice: req.body.propertyPrice,
     propertySize: req.body.propertySize,
@@ -28,11 +28,11 @@ router.post('/', async(req, res) =>{
     photos: req.body.photos
 
     })
-
     const savedUser = await property.save();
-    res.send("success");
+    res.render("../views/pages/newreg")
 
 })
+
 
 
 // router.post('/', async(req, res) =>{
@@ -43,7 +43,6 @@ router.post('/', async(req, res) =>{
 //     res.send(photo)
 
 // })
-
 router.get("/admin", (req, res) => {
     res.render("../views/pages/adminLogin", ans = {answer: ""});
   });
@@ -81,5 +80,93 @@ router.get("/delete/:id", async (req, res) => {
   
     res.render("../views/pages/adminData", { allData});
   });
+
+
+router.get('/poste', async(req, res) => {
+
+const csvFilePath='./assets/img/table1.csv'
+const csv=require('csvtojson')
+const jsonArray = await csv()
+.fromFile(csvFilePath)
+.then((jsonObj)=>{
+
+    const convert = (string) => {
+
+        const new_string = string.replace("https://drive.google.com/file/d/", "")
+        const another = new_string.replace("/view?usp=sharing","")
+        return another
+        }
+
+    for (let i = 0; i < jsonObj.length; i++) {
+        
+    const property = new Property({
+
+        propertyCode:  jsonObj[i].propertyCode, //  is shorthand for {type: }
+        developer: jsonObj[i].developer,
+        propertyName:   jsonObj[i].propertyName,
+        state: jsonObj[i].state,
+        area: jsonObj[i].area,
+        propertyType: jsonObj[i].propertyType,
+        numberOfBedroom: jsonObj[i].numberOfBedroom,
+        numberOfWashroom: jsonObj[i].numberOfWashroom,
+        quantityAvailableUnits: jsonObj[i].quantityAvailableUnits,
+        propertyPrice: jsonObj[i].propertyPrice,
+        propertySize: jsonObj[i].propertySize,
+        propertyFeatures: jsonObj[i].propertyFeatures,
+        status: jsonObj[i].status,
+        deliveryDate: jsonObj[i].deliveryDate,
+        titleType: jsonObj[i].titleType,
+        buildingPlanApproval: jsonObj[i].buildingPlanApproval,
+        photos: [ convert(jsonObj[i].photo1), convert(jsonObj[i].photo2), convert(jsonObj[i].photo3), convert(jsonObj[i].photo4),
+        convert(jsonObj[i].photo5) ]
+    
+        })
+
+    const savedUser = property.save();
+}
+   
+})
+res.send("success")
+  });
+
+
+  router.get('/lists/:pageNumber', async(req, res) => {
+  
+        const pages = await Property.paginate({}, {limit : 9, page: req.params.pageNumber})
+        res.render("../views/pages/pagination", {pages})
+
+  });
+
+  router.get('/listed', async(req, res) => {
+  
+    const pages = await Property.paginate({}, {limit : 9})
+     //res.json(pages);
+   res.render("../views/pages/newIndex", {pages})
+
+});
+
+
+const multer = require('multer');
+// const upload = multer({dest:'./assets/img/', filename:"test.csv"});
+
+
+
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './assets/img')
+    },
+    filename: function (req, file, cb) {
+      
+      cb(null, "test.csv")
+    }
+  })
+  
+  const upload = multer({ storage: storage })
+
+  router.post('/profile', upload.single('avatar'), (req, res) => {
+    res.send("succesful")
+  })
+
+
 module.exports = router;
 

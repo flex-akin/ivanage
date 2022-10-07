@@ -20,9 +20,9 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () =>
 );
 
 app.get("/", async (req, res) => {
-  const allData = await Property.find();
-
-  res.render("../views/pages/index", { allData });
+  const pages = await Property.paginate({}, {limit : 9})
+  //res.json(pages);
+res.render("../views/pages/newIndex", {pages})
 });
 
 app.get("/mortgageCalculator", async (req, res) => {

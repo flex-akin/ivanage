@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2');
+
 
 const propertySchema = new mongoose.Schema({
     propertyCode:  String, 
@@ -8,7 +10,7 @@ const propertySchema = new mongoose.Schema({
     area: String,
     propertyType: String,
     numberOfBedroom: String,
-    numberOfwashroom: String,
+    numberOfWashroom: String,
     quantityAvailableUnits: String,
     propertyPrice: Number,
     propertySize: String,
@@ -20,5 +22,6 @@ const propertySchema = new mongoose.Schema({
     photos: []
 
 })
+propertySchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Property', propertySchema);

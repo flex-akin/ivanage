@@ -66,6 +66,9 @@ $(".photoClass").each(function(){
   
           success: function (res) {
           console.log("ajaxresponse",res)
+          window.location.reload()
+          alert("property registered")
+
           },
         });
       });
@@ -167,7 +170,7 @@ $(".photoClass").each(function(){
 
   <div class="col-lg-4 col-md-4">
     <label for="exampleInputPassword1" class="form-label">Number of Washrooms</label>
-    <input type="text" id="numberOfWashrooms" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+    <input type="text" id="numberOfWashroom" style="height: 40px;" class="form-control" id="exampleInputPassword1">
   </div>
 </div>
 
@@ -246,6 +249,29 @@ $(".photoClass").each(function(){
 
 </section>
 <!-- End Team Section -->
+<center>
+  <section class="testimonial section-bg ">
+    <div class="container">
+      <div class="row justify-content-center">
+  
+          <form action="/api/list/profile" method="post" enctype="multipart/form-data">
+        <div class=" justify-content-center col-lg-6">
+            <input type="file" accept="" class="form-control" name="avatar" />
+        </div>
+        <br>
+  <div class="justify-content-center col-lg-6">
+    <input type="submit"  class="btn btn-primary">
+  </div>
+  
+          </form>
+    </div>
+  </div>
+    
+  
+  </section>
+
+</center>
+
 
 
   <!-- ======= Footer ======= -->

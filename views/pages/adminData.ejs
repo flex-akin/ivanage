@@ -35,15 +35,10 @@ tr:nth-child(even) {
             <th>area</th>
             <th>Number of Bedrooms</th>
             <th>Number of Washrooms</th>
-            <th>Number of propertyPrice</th>
-            <th>Number of propertyFeatures</th>
-            <th>Number of Status</th>
-
-
-            
-
-
-
+            <th>property Price</th>
+            <th>property Features</th>
+            <th>Status</th>
+            <th>Property Type</th>
             </tr>
     <% for(var i=0; i < allData.length; i++) { %>
 
@@ -58,6 +53,7 @@ tr:nth-child(even) {
             <td> <%= allData[i].propertyPrice %></td>
             <td> <%= allData[i].propertyFeatures %></td>
             <td> <%= allData[i].status %></td>
+            <td> <%= allData[i].propertyType %></td>
             <td> <a href=" /api/list/delete/<%= allData[i].propertyCode %> ">  <i class="fa-sharp fa-solid fa-trash" style="color: red;"></i></a></td>
             </tr>
         <% } %>

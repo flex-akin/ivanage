@@ -30,7 +30,7 @@
               <div  id="icons-block">
                 <i class="fa-solid fa-location-dot"></i> <font><%= oneData.state %>, <%= oneData.area %> </font>  &nbsp; &#183; &nbsp;
                  <i class="fa-solid fa-bed"> </i> <%= oneData.numberOfBedroom %>&nbsp; &#183; &nbsp;
-                <i class="fa-solid fa-bath"> </i> <%= oneData.quantityBedroom %> &nbsp; &#183; &nbsp;
+                <i class="fa-solid fa-bath"> </i> <%= oneData.numberOfWashroom %> &nbsp; &#183; &nbsp;
                 <i class="fa-solid fa-house"> </i> <%= oneData.propertyType%>&nbsp;  &#183; &nbsp;
                 <i class="fa-solid fa-person-digging"></i> <%= oneData.status%>&nbsp;  
 
@@ -141,12 +141,26 @@
     
         <div class="row" >
          <h2 style="font-weight: 600;">Property Features</h2>
-         <%= oneData.propertyFeatures %>
+         <div id="propertyFt" style="font-size: 15px;">
+
+         </div>
 
         
         </div>
     
       </div>
+      <script>
+        text = " <%= oneData.propertyFeatures %> "
+        var nameArr = text.split(',');
+        console.log(nameArr)
+        var list = document.createElement("ul");
+for (let i of nameArr) {
+  let item = document.createElement("li");
+  item.innerHTML = i;
+  list.appendChild(item);
+  document.getElementById("propertyFt").appendChild(list);
+}
+      </script>
   
 
 

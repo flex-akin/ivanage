@@ -38,7 +38,7 @@ app.get("/error", async (req, res) => {
 });
 
 app.get("/filter", async (req, res) => {
-  const {
+  var {
     state,
     area,
     propertyType,
@@ -50,17 +50,33 @@ app.get("/filter", async (req, res) => {
 
   const minPrice = Number((min_price).replace(/\,/g, ''));
   var maxPrice = Number((max_price).replace(/\,/g, ''));
-  var nofBedroom = parseInt(nofBedroom);
+  var nofBedroom = Number(nof_Bedroom);
 
-  // const minPrice = parseInt(min_price)
-  // var maxPrice = parseInt(max_price
-  // var nofBedroom = parseInt(nofBedroom)
+  if (status) {
+    status = [status]
+  }else{
+    status = ["Off Plan", "Completed"]
+  }
+
+  if (propertyType) {
+    propertyType =[propertyType]
+  }else{
+    propertyType = ["Apartment", "Studio", "Terrace", "Semi Detached", "Penthouse", "Town House", "Maisonette" ]
+  }
+
+  if (nofBedroom <= 0) {
+    nofBedroom =[0,1,2,3,4,5,6,7,8,9]
+  }else {
+    nofBedroom =[nofBedroom]
+  }
+
+
 
   console.log([
     state,
     area,
     propertyType,
-    nof_Bedroom,
+    nofBedroom,
     status,
     min_price,
     max_price,
@@ -73,8 +89,8 @@ app.get("/filter", async (req, res) => {
       if (!state) {
         const allData = await Property.find({
           status: status,
-          propertyType: propertyType,
-          nofBedroom: nofBedroom,
+          propertyType: { $in: propertyType } ,
+          numberOfBedroom: { $in: nofBedroom},
           propertyPrice: { $gte: minPrice, $lte: 1000000000 },
         });
 
@@ -82,10 +98,10 @@ app.get("/filter", async (req, res) => {
         return res.render("../views/pages/viee", { allData });
       } else if (state) {
         const allData = await Property.find({
-          status: status,
-          propertyType: propertyType,
+          status: { $in: status },
+          propertyType:  { $in: propertyType },
           state: state,
-          nofBedroom: nofBedroom,
+          numberOfBedroom: { $in: nofBedroom},
           propertyPrice: { $gte: minPrice, $lte: 1000000000 },
         });
 
@@ -93,12 +109,12 @@ app.get("/filter", async (req, res) => {
       }
     }
   }
-
+  
   const allData = await Property.find({
-    status: status,
-    propertyType: propertyType,
+    status:  { $in: status },
+    propertyType: { $in: propertyType },
     area: area,
-    nofBedroom: nofBedroom,
+    numberOfBedroom: { $in: nofBedroom},
     propertyPrice: { $gte: minPrice, $lte: maxPrice },
   });
 
@@ -186,6 +202,7 @@ app.post("/sendmailer", (req, res) => {
     email: "felix.akintola@ivantage.africa",
   };
 
+  
   const receivers = [
     {
       email: "property@ivantage.africa",

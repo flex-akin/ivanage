@@ -84,7 +84,7 @@ router.get("/delete/:id", async (req, res) => {
 
 router.get('/poste', async(req, res) => {
 
-const csvFilePath='./assets/img/table1.csv'
+const csvFilePath='./assets/img/ivantagest.csv'
 const csv=require('csvtojson')
 const jsonArray = await csv()
 .fromFile(csvFilePath)

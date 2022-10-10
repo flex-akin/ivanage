@@ -7,7 +7,7 @@
     .mortInput {
   outline: 0;
   border-width: 0 0 2px;
-  border-color: blue
+  border-color: #17a2b8
 }
 input:focus {
   border-color: green
@@ -143,13 +143,13 @@ input:focus {
 <div class="row">
   <div style="background-color: rgb(246, 248, 248); border: 2px solid white;" class="col-lg-6 col-md-6">
     <h4 style="font-size: 20px;"> <strong>Maximum Property Value</strong> </h4>
-    <h3 class="d-flex flex-row-reverse" style="color: #19ae6b; font-size: 30px; font-weight: 500;" id="maxpv">₦0.00 </h3>
+    <h3 class="d-flex flex-row" style="color: #17a2b8; font-size: 25px; font-weight: 500;" id="maxpv">₦0.00 </h3>
 
 
   </div>
   <div style="background-color: rgb(246, 248, 248); border: 2px solid white;" class="col-lg-6 col-md-6">
     <h4 style="font-size: 20px;"> <strong>Monthly Repayment</strong></h4>
-    <h3 class="d-flex flex-row-reverse" style="color: #19ae6b; font-size: 30px; font-weight: 500;" id="monthly">₦0.00 </h3>
+    <h3 class="d-flex flex-row" style="color: #17a2b8; font-size: 25px; font-weight: 500;" id="monthly">₦0.00 </h3>
     
     
 
@@ -159,7 +159,7 @@ input:focus {
 <div class="row">
   <div style="background-color: rgb(246, 248, 248); border: 2px solid white;" class="col-lg-6 col-md-6">
     <h4 style="font-size: 20px;"> <strong>Interest Rate</strong></h4>
-    <h3 class="d-flex flex-row-reverse" style="color: #19ae6b;font-size: 30px; font-weight: 500;"> 19%</h3>
+    <h3 class="d-flex flex-row" style="color: #17a2b8;font-size: 25px; font-weight: 500;"> 19%</h3>
 
     
 
@@ -167,10 +167,10 @@ input:focus {
   <div style="background-color: rgb(246, 248, 248); border: 2px solid white;" class="col-lg-6 col-md-6">
     <h4 style="font-size: 20px;"> <strong>Tenor</strong>
     <button type="button" class="btn" id="btnshow" data-delay='{"show":"5000", "hide":"3000"}' data-bs-toggle="tooltip" data-bs-placement="top" title="Tenor will be used deirectly as inputed if it is less than (60 - Age), else (60 - Age) is uesed a tenor  ">
-      <i class="fa-sharp fa-solid fa-circle-info "></i> 
+      <i class="fa-sharp fa-solid fa-circle-info"></i> 
     </button>
     </h4>
-    <h3 class="d-flex flex-row-reverse" style="color: #19ae6b; font-size: 30px; font-weight: 500;" id="tenor"> ₦0.00</h3>
+    <h3 class="d-flex flex-row" style="color: #17a2b8; font-size:25px; font-weight: 500;" id="tenor"> ₦0.00</h3>
 
 
   </div>
@@ -286,7 +286,7 @@ input:focus {
               const month = loanTerm * 12
               const rate = (0.19 / 12)
               const loanAmount = (payment * ( 1 - Math.pow((1 + rate), (-1 * month))))/rate
-              const monthly = loanAmount / loanTerm
+              const monthly = loanAmount / month
               const downPay = downPayment()
               const affordability = Number(loanAmount) + Number(downPay)
               

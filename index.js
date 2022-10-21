@@ -95,7 +95,7 @@ app.get("/filter", async (req, res) => {
         });
 
         //return res.json(allData)
-        return res.render("../views/pages/index", { allData });
+        return res.render("../views/pages/viee", { allData });
       } else if (state) {
         const allData = await Property.find({
           status: { $in: status },
@@ -105,7 +105,7 @@ app.get("/filter", async (req, res) => {
           propertyPrice: { $gte: minPrice, $lte: 1000000000 },
         });
 
-        return res.render("../views/pages/index", { allData });
+        return res.render("../views/pages/viee", { allData });
       }
     }
   }
@@ -119,13 +119,13 @@ app.get("/filter", async (req, res) => {
   });
 
   //res.json(allData)
-  return res.render("../views/pages/index", { allData });
+  return res.render("../views/pages/viee", { allData });
   // res.send(allData)
 });
 
 // filters for only admin page
 
-app.get("/filters", async (req, res) => {
+app.get("/adminfilters", async (req, res) => {
   var {
     state,
     area,

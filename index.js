@@ -330,6 +330,7 @@ app.post("/sendmailer", (req, res) => {
 });
 
 app.get('/adminfilter', async (req,res) =>{
+  const allData = await 0
   res.render('../views/pages/aminfilter', {allData})
 })
 

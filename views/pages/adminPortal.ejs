@@ -55,7 +55,7 @@ $(".photoClass").each(function(){
             numberOfWashroom: numberOfWashroom,
             quantityAvailableUnits: quantityAvailableUnits,
             propertyPrice: propertyPrice,
-            propertySize: propertyPrice,
+            propertySize: propertySize,
             propertyFeatures: propertyFeatures,
             status: status,
             deliveryDate: deliveryDate,
@@ -65,8 +65,7 @@ $(".photoClass").each(function(){
           }),
   
           success: function (res) {
-          console.log("ajaxresponse",res)
-          window.location.reload()
+          // window.location.reload()
           alert("property registered")
 
           },

@@ -95,7 +95,7 @@ app.get("/filter", async (req, res) => {
         });
 
         //return res.json(allData)
-        return res.render("../views/pages/viee", { allData });
+        return res.render("../views/pages/index", { allData });
       } else if (state) {
         const allData = await Property.find({
           status: { $in: status },
@@ -105,7 +105,7 @@ app.get("/filter", async (req, res) => {
           propertyPrice: { $gte: minPrice, $lte: 1000000000 },
         });
 
-        return res.render("../views/pages/viee", { allData });
+        return res.render("../views/pages/index", { allData });
       }
     }
   }
@@ -119,9 +119,104 @@ app.get("/filter", async (req, res) => {
   });
 
   //res.json(allData)
-  return res.render("../views/pages/viee", { allData });
+  return res.render("../views/pages/index", { allData });
   // res.send(allData)
 });
+
+// filters for only admin page
+
+app.get("/filters", async (req, res) => {
+  var {
+    state,
+    area,
+    propertyType,
+    nofBedroom: nof_Bedroom,
+    status,
+    minPrice: min_price,
+    maxPrice: max_price,
+  } = req.query;
+
+  const minPrice = Number((min_price).replace(/\,/g, ''));
+  var maxPrice = Number((max_price).replace(/\,/g, ''));
+  var nofBedroom = Number(nof_Bedroom);
+
+  if (status) {
+    status = [status]
+  }else{
+    status = ["Off Plan", "Completed"]
+  }
+
+  if (propertyType) {
+    propertyType =[propertyType]
+  }else{
+    propertyType = ["Apartment", "Studio", "Terrace", "Semi Detached", "Penthouse", "Town House", "Maisonette" ]
+  }
+
+  if (nofBedroom <= 0) {
+    nofBedroom =[0,1,2,3,4,5,6,7,8,9]
+  }else {
+    nofBedroom =[nofBedroom]
+  }
+
+
+
+  console.log([
+    state,
+    area,
+    propertyType,
+    nofBedroom,
+    status,
+    min_price,
+    max_price,
+  ]);
+
+  if (!maxPrice) {
+    maxPrice = 1000000000;
+
+    if (!area) {
+      if (!state) {
+        const allData = await Property.find({
+          status: status,
+          propertyType: { $in: propertyType } ,
+          numberOfBedroom: { $in: nofBedroom},
+          propertyPrice: { $gte: minPrice, $lte: 1000000000 },
+        });
+
+        //return res.json(allData)
+        return res.render("../views/pages/index", { allData });
+      } else if (state) {
+        const allData = await Property.find({
+          status: { $in: status },
+          propertyType:  { $in: propertyType },
+          state: state,
+          numberOfBedroom: { $in: nofBedroom},
+          propertyPrice: { $gte: minPrice, $lte: 1000000000 },
+        });
+
+        return res.render("../views/pages/index", { allData });
+      }
+    }
+  }
+  
+  const allData = await Property.find({
+    status:  { $in: status },
+    propertyType: { $in: propertyType },
+    area: area,
+    numberOfBedroom: { $in: nofBedroom},
+    propertyPrice: { $gte: minPrice, $lte: maxPrice },
+  });
+
+  //res.json(allData)
+  return res.render("../views/pages/index", { allData });
+  // res.send(allData)
+});
+
+
+//filters ends here
+
+
+
+
 
 app.set("view engine", "ejs");
 app.use("/assets", express.static(path.join(__dirname, "assets")));
@@ -233,6 +328,10 @@ app.post("/sendmailer", (req, res) => {
       }
     );
 });
+
+app.get('/adminfilter', async (req,res) =>{
+  res.render('../views/pages/aminfilter', {allData})
+})
 
 app.use("/api/list", list);
 

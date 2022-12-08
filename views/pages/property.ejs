@@ -79,14 +79,12 @@
                   ₦<%= oneData.propertyPrice%>
                 </h1>
                 <script>
-
                   var x = " <%= oneData.propertyPrice %> " 
                 function numberWithCommas(x) {
                  a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                  b = `₦${a}`
                  return b.replace(/\s/g, '')
                   }
-
                     document.getElementById("pricer").innerText = numberWithCommas(x)
               </script>
     
@@ -271,17 +269,34 @@ for (let i of nameArr) {
         <div class="modal-body"    
         
           <div class="container" data-aos="fade-up">
-          
-                <div>
+            <div class="row">
+                
                   <div class="col-lg-3">
-                    <a href="https://www.imperialmortgagebank.com/pre-assess/">
-                      <img src="/assets/img/logo/imperial_logo.png" style="padding-top:30px;" class=" rounded float-start" alt="...">
+                    <a href="https://www.imperialmortgagebank.com/propertyInterest.html">
+                      <img src="/assets/img/logo/imperial_logo.png" style="padding-top:30px;" class=" rounded float-start img-fluid" alt="...">
 
                     </a>
                   </div>
-                </div>
+
+                  <div class="col-lg-3">
+                    <a href="https://brentng.com/mortgage-application-form/">
+                      <img src="/assets/img/logo/client-3.png" style="padding-top:50px;" class=" rounded float-start img-fluid" alt="...">
+
+                    </a>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <a href="http://www.homebasebank.com/mortgage_rate.php">
+                      <img src="/assets/img/logo/client-7.png" style="padding-top:50px;" class=" rounded float-start img-fluid" alt="...">
+
+                    </a>
+                  </div>
               </div>
+            </div>
         
+              
+          
+            
           
          
         <div class="modal-footer">
@@ -290,6 +305,8 @@ for (let i of nameArr) {
       </div>
     </div>
   </div>
+  
+  
  </section>
 
 

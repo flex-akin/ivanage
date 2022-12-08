@@ -95,7 +95,7 @@ app.get("/filter", async (req, res) => {
         });
 
         //return res.json(allData)
-        return res.render("../views/pages/viee", { allData });
+        return res.render("../views/pages/vie#", { allData });
       } else if (state) {
         const allData = await Property.find({
           status: { $in: status },

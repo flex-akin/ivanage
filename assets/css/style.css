@@ -1301,3 +1301,9 @@ section {
   transition-delay: 0s;
 
 }
+
+#form-label{
+  padding-top: 10px;
+  font-weight: 700;
+  font-size: 15px;
+}

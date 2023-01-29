@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <%- include('../../partials/head'); %>
+  <%- include('../../partials/header'); %>
+
+  <script>
+    $(document).ready(function () {
+      $("#regForm").on("submit", function (event) {
+        event.preventDefault();
+
+        const form = document.getElementById('regForm');
+        var data = new FormData(form);
+        
+      console.log("data",data)
+
+        $.ajax({
+          url: `http://localhost:5050/api/ivantage/project/addproject`,
+          method: "POST",
+          contentType: false,
+          processData: false,
+          headers : {
+            token : "imperial+"
+          },
+          data : data,
+          success: function (res) {
+          // window.location.reload()
+          console.log("respons",res)
+          alert("property registered")
+          
+
+          },
+        });
+      }
+      )
+    })    
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      var max_fields      = 10; //maximum input boxes allowed
+      var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+      var add_button      = $(".add_field_button"); //Add button ID
+     
+      var x = 1; //initlal text box count
+    
+    
+     $(add_button).click(function(e){ //on add input button click
+          e.preventDefault();
+          if(x < max_fields){ //max input box allowed
+    
+             
+              $(wrapper).append(`
+              <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label" >Photos</label>
+    <input type="file" class="photoClass form-control" name="photos" style="height: 40px;"> 
+    <a href="#" class="remove_field"><i class="fa-solid fa-minus"></i></a></div>
+  </div>
+              
+              
+              `); //add input box
+              x++; 
+      }
+      });
+     
+      $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+         
+      e.preventDefault(); 
+      $(this).parent('div').remove(); 
+      x--;
+      })
+  });
+
+    
+    </script>
+
+
+
+  
+
+
+<section style="padding-top:100px ;" id="team" class="testimonial section-bg">
+<div class="container">
+
+  <center>
+    <h1 class="h3 mb-3 font-weight-normal" style="color: #17a2b8; font-weight: 700;">Add Property </h1>
+    
+  </center>
+
+  <div class="form">
+
+    <form id="regForm" >
+<div class="row justify-content-center">
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Property Code</label>
+    <input type="text" name="propertyCode" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Developer</label>
+    <input type="text" name="develope" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Property Name</label>
+    <input type="text" name="projectNam" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label"  >State</label>
+    <input type="text" name="state" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Area</label>
+    <input type="text" name="area" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Property Type</label>
+    <input type="text" name="propertyType" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Area</label>
+    <input type="date" name="completionDate" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Property Type</label>
+    <input type="text" name="mapLocation" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Number of Bedrooms</label>
+    <input type="text" name="numberOfBedrooms" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Number of Washrooms</label>
+    <input type="text" name="numberOfWashrooms" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Quantity Available Units</label>
+    <input type="number" name="availableUnits" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Property Price</label>
+    <input type="number" name="price" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Property Size</label>
+    <input type="text" name="propertySize" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Property Features</label>
+    <input type="text" name="propertyFeatures" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Status</label>
+    <input type="text" name="status" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Delivery Date</label>
+    <input type="text" name="totalUnits" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">titleType</label>
+    <input type="text" name="descriptio" style="height: 40px;" class="form-control">
+  </div>
+
+  <div class="col-lg-5 col-md-4">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Building Plan Approval</label>
+    <input type="text" name="buildingPlanApproval" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+
+
+<div class="row justify-content-center input_fields_wrap">
+  <div class="col-lg-5 col-md-4 ">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">Photos</label>
+    <input type="file" class="photoClass form-control" name="photos" id="photos" style="height: 40px;"> 
+    <i class="fa-solid fa-plus add_field_button"></i>
+  </div>
+
+  <div class="col-lg-5 col-md-4 ">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">documents</label>
+    <input type="file" class="photoClass form-control" name="documents" id="documents" style="height: 40px;"> 
+    <i class="fa-solid fa-plus add_field_button"></i>
+  </div>
+
+  <div class="col-lg-5 col-md-4 ">
+    <label for="exampleInputPassword1" class="form-label" id="form-label">documents</label>
+    <input type="file" class="photoClass form-control" name="documents" id="documents" style="height: 40px;"> 
+    <i class="fa-solid fa-plus add_field_button"></i>
+  </div>
+
+  <label for="exampleInputPassword1" class="form-label" id="form-label">Building Plan Approval</label>
+  <input type="text" name="projectId" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+
+<label for="exampleInputPassword1" class="form-label" id="form-label">Building Plan Approval</label>
+<input type="text" name="developer" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+
+<label for="exampleInputPassword1" class="form-label" id="form-label">Building Plan Approval</label>
+<input type="text" name="projectName" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+
+<label for="exampleInputPassword1" class="form-label" id="form-label">Building Plan Approval</label>
+<input type="text" name="description" style="height: 40px;" class="form-control" id="exampleInputPassword1">
+
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-1">
+  <input type="submit" class="btn btn-success" value="submit">
+  </div>
+</div>
+
+    </form>
+    
+ <a href="/api/list/grehdsjhskjefi-io" style="padding-left: 200px;"> view all Data</a>
+
+  </div>
+</div>
+ 
+
+</section>
+<!-- End Team Section -->
+<center>
+  <section class="testimonial section-bg ">
+    <div class="container">
+      <div class="row justify-content-center">
+  
+          <!-- <form action="/api/list/profile" method="post" enctype="multipart/form-data">
+        <div class=" justify-content-center 4">
+            <input type="file" accept="" class="form-control" name="avatar" />
+        </div>
+        <br>
+  <div class="justify-content-center 4">
+    <input type="submit"  class="btn btn-primary">
+  </div>
+  
+          </form> -->
+    </div>
+  </div>
+    
+  
+  </section>
+
+</center>
+
+
+
+  <!-- ======= Footer ======= -->
+  <%- include('../../partials/footer'); %>
+</body>
+
+</html>
+
+ 
+
+

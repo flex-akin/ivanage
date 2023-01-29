@@ -13,7 +13,8 @@
         const convert = (string) => {
 
 const new_string = string.replace("https://drive.google.com/file/d/", "")
-const another = new_string.replace("/view?usp=share_link","")
+const newString = new_string.replace("view?usp=sharing", "")
+const another = newString.replace("/view?usp=share_link","")
 return another
 }
 

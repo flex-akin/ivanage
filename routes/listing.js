@@ -93,7 +93,7 @@ const jsonArray = await csv()
     const convert = (string) => {
 
         const new_string = string.replace("https://drive.google.com/file/d/", "")
-        const another = new_string.replace("/view?usp=sharing","")
+        const another = new_string.replace("/view?usp=share","")
         return another
         }
 

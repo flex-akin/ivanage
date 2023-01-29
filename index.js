@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const path = require("path");
+const path = require("path");``
 const port = 3000;
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -20,13 +20,36 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () =>
 );
 
 app.get("/", async (req, res) => {
+
+  function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
   const pages = await Property.paginate({}, {limit : 9})
-  //res.json(pages);
+  shuffle(pages.docs)
+  //res.send(pages)
 res.render("../views/pages/newIndex", {pages})
 });
 
 app.get("/mortgageCalculator", async (req, res) => {
   res.render("../views/pages/mortgageCalculator");
+});
+
+app.get("/adminportal", async (req, res) => {
+  res.render("../views/pages/newpages/newAdminPost");
 });
 
 app.get("/success", async (req, res) => {

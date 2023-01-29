@@ -131,15 +131,34 @@ res.send("success")
 
 
   router.get('/lists/:pageNumber', async(req, res) => {
+    function shuffle(array) {
+      let currentIndex = array.length,  randomIndex;
+    
+      // While there remain elements to shuffle.
+      while (currentIndex != 0) {
+    
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+    
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+    
+      return array;
+    }
   
-        const pages = await Property.paginate({}, {limit : 9, page: req.params.pageNumber})
+        const pages = await Property.paginate({}, {limit : 21,  page: req.params.pageNumber}, {sort: { id: 'asc'}})
+       shuffle(pages.docs)
+
         res.render("../views/pages/pagination", {pages})
 
   });
 
   router.get('/listed', async(req, res) => {
   
-    const pages = await Property.paginate({}, {limit : 9})
+    const pages = await Property.paginate({}, {limit : 21})
      //res.json(pages);
    res.render("../views/pages/newIndex", {pages})
 

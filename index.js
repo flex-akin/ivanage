@@ -38,10 +38,10 @@ app.get("/", async (req, res) => {
   
     return array;
   }
-  const pages = await Property.paginate({}, {limit : 21})
+  const pages = await Property.paginate({}, {limit : 21}, {sort: { id: 'asc'}})
   shuffle(pages.docs)
-  //res.send(pages)
-res.render("../views/pages/newIndex", {pages})
+  res.send(pages)
+//res.render("../views/pages/newIndex", {pages})
 });
 
 app.get("/mortgageCalculator", async (req, res) => {

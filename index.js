@@ -38,7 +38,7 @@ app.get("/", async (req, res) => {
   
     return array;
   }
-  const pages = await Property.paginate({}, {limit : 9})
+  const pages = await Property.paginate({}, {limit : 21})
   shuffle(pages.docs)
   //res.send(pages)
 res.render("../views/pages/newIndex", {pages})

@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const Property = require("./model/Property");
 const Sib = require("sib-api-v3-sdk");
 const list = require("./routes/listing");
+const axios = require("axios")
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -38,18 +39,29 @@ app.get("/", async (req, res) => {
   
     return array;
   }
-  const pages = await Property.paginate({}, {limit : 21}, {sort: { id: 'asc'}})
-  shuffle(pages.docs)
+  //const pages = await Property.paginate({}, {limit : 21}, {sort: { id: 'asc'}})
+  const config = {
+    method: 'get',
+    url: 'https://propertyapi.ivantage.africa/api/ivantage/properties?size=21',
+    headers: { 'token': 'adebam' },
+ 
+}
+  try{
+    const page =  await axios(config)
+    const pages = page.data
+    res.render("../views/pages/newIndex", {pages} )
+
+    // res.send(pages.data.data.propertyData)
+  }
+  catch(error){
+    console.log(error.message)
+  }
+  //shuffle(pages.propertData)
   //res.send(pages)
-res.render("../views/pages/newIndex", {pages})
-});
+});   
 
 app.get("/mortgageCalculator", async (req, res) => {
   res.render("../views/pages/mortgageCalculator");
-});
-
-app.get("/adminportal", async (req, res) => {
-  res.render("../views/pages/newpages/newAdminPost");
 });
 
 app.get("/success", async (req, res) => {
@@ -61,184 +73,40 @@ app.get("/error", async (req, res) => {
 });
 
 app.get("/filter", async (req, res) => {
-  var {
-    state,
-    area,
-    propertyType,
-    nofBedroom: nof_Bedroom,
-    status,
-    minPrice: min_price,
-    maxPrice: max_price,
-  } = req.query;
+  const state = req.query.state
+  var minPrice = req.query.minPrice
+  minPrice = minPrice.replaceAll(',', '')
+  var maxPrice = req.query.maxPrice
+  maxPrice = maxPrice.replaceAll(',', '')
+  const propertyType = req.query.propertyType
+  const status = req.query.status
+  const numberOfBedrooms = req.query.numberOfBedrooms
 
-  const minPrice = Number((min_price).replace(/\,/g, ''));
-  var maxPrice = Number((max_price).replace(/\,/g, ''));
-  var nofBedroom = Number(nof_Bedroom);
+console.log(minPrice)
 
-  if (status) {
-    status = [status]
-  }else{
-    status = ["Off Plan", "Completed"]
+  const config = {
+    method: 'get',
+    url: `https://propertyapi.ivantage.africa/api/ivantage/findproperty?state=${state}&minPrice=${minPrice}&maxPrice=${maxPrice}&propertyType=${propertyType}&numberOfBedroooms=${numberOfBedrooms}&status=${status}
+  `,
+    headers: { 'token': 'adebam' ,
+                "companyId" : 1  
+  },
+ 
+}
+  try{
+    const page =  await axios(config)
+    const pages = page.data
+  res.render("../views/pages/pagination", { pages });
+
+
+    // res.send(pages.data.data.propertyData)
   }
-
-  if (propertyType) {
-    propertyType =[propertyType]
-  }else{
-    propertyType = ["Apartment", "Studio", "Terrace", "Semi Detached", "Penthouse", "Town House", "Maisonette" ]
+  catch(error){
+    console.log(error.message)
   }
-
-  if (nofBedroom <= 0) {
-    nofBedroom =[0,1,2,3,4,5,6,7,8,9]
-  }else {
-    nofBedroom =[nofBedroom]
-  }
-
-
-
-  console.log([
-    state,
-    area,
-    propertyType,
-    nofBedroom,
-    status,
-    min_price,
-    max_price,
-  ]);
-
-  if (!maxPrice) {
-    maxPrice = 1000000000;
-
-    if (!area) {
-      if (!state) {
-        const allData = await Property.find({
-          status: status,
-          propertyType: { $in: propertyType } ,
-          numberOfBedroom: { $in: nofBedroom},
-          propertyPrice: { $gte: minPrice, $lte: 1000000000 },
-        });
-
-        //return res.json(allData)
-        return res.render("../views/pages/vie#", { allData });
-      } else if (state) {
-        const allData = await Property.find({
-          status: { $in: status },
-          propertyType:  { $in: propertyType },
-          state: state,
-          numberOfBedroom: { $in: nofBedroom},
-          propertyPrice: { $gte: minPrice, $lte: 1000000000 },
-        });
-
-        return res.render("../views/pages/viee", { allData });
-      }
-    }
-  }
-  
-  const allData = await Property.find({
-    status:  { $in: status },
-    propertyType: { $in: propertyType },
-    area: area,
-    numberOfBedroom: { $in: nofBedroom},
-    propertyPrice: { $gte: minPrice, $lte: maxPrice },
-  });
-
   //res.json(allData)
-  return res.render("../views/pages/viee", { allData });
   // res.send(allData)
 });
-
-// filters for only admin page
-
-app.get("/adminfilters", async (req, res) => {
-  var {
-    state,
-    area,
-    propertyType,
-    nofBedroom: nof_Bedroom,
-    status,
-    minPrice: min_price,
-    maxPrice: max_price,
-  } = req.query;
-
-  const minPrice = Number((min_price).replace(/\,/g, ''));
-  var maxPrice = Number((max_price).replace(/\,/g, ''));
-  var nofBedroom = Number(nof_Bedroom);
-
-  if (status) {
-    status = [status]
-  }else{
-    status = ["Off Plan", "Completed"]
-  }
-
-  if (propertyType) {
-    propertyType =[propertyType]
-  }else{
-    propertyType = ["Apartment", "Studio", "Terrace", "Semi Detached", "Penthouse", "Town House", "Maisonette" ]
-  }
-
-  if (nofBedroom <= 0) {
-    nofBedroom =[0,1,2,3,4,5,6,7,8,9]
-  }else {
-    nofBedroom =[nofBedroom]
-  }
-
-
-
-  console.log([
-    state,
-    area,
-    propertyType,
-    nofBedroom,
-    status,
-    min_price,
-    max_price,
-  ]);
-
-  if (!maxPrice) {
-    maxPrice = 1000000000;
-
-    if (!area) {
-      if (!state) {
-        const allData = await Property.find({
-          status: status,
-          propertyType: { $in: propertyType } ,
-          numberOfBedroom: { $in: nofBedroom},
-          propertyPrice: { $gte: minPrice, $lte: 1000000000 },
-        });
-
-        //return res.json(allData)
-        return res.render("../views/pages/index", { allData });
-      } else if (state) {
-        const allData = await Property.find({
-          status: { $in: status },
-          propertyType:  { $in: propertyType },
-          state: state,
-          numberOfBedroom: { $in: nofBedroom},
-          propertyPrice: { $gte: minPrice, $lte: 1000000000 },
-        });
-
-        return res.render("../views/pages/index", { allData });
-      }
-    }
-  }
-  
-  const allData = await Property.find({
-    status:  { $in: status },
-    propertyType: { $in: propertyType },
-    area: area,
-    numberOfBedroom: { $in: nofBedroom},
-    propertyPrice: { $gte: minPrice, $lte: maxPrice },
-  });
-
-  //res.json(allData)
-  return res.render("../views/pages/index", { allData });
-  // res.send(allData)
-});
-
-
-//filters ends here
-
-
-
 
 
 app.set("view engine", "ejs");
@@ -250,12 +118,28 @@ app.get("/", (req, res) => {
 
 
 
-app.get("/show/:propertyCode", async (req, res) => {
+app.get("/show/:id", async (req, res) => {
   const rest = 0;
-  const uid = req.params.propertyCode;
-  const oneData = await Property.findOne({ propertyCode: uid });
+  const uid = req.params.id;
 
+  const config = {
+    method: 'get',
+    url: `https://propertyapi.ivantage.africa/api/ivantage/property/${uid}`,
+    headers: { 'token': 'adebam' },
+ 
+}
+  try{
+    const page =  await axios(config)
+    const oneData = page.data
   res.render("../views/pages/property", { oneData, rest });
+
+
+    // res.send(pages.data.data.propertyData)
+  }
+  catch(error){
+    console.log(error.message)
+  }
+
 });
 
 app.post("/sendmail", (req, res) => {
@@ -271,7 +155,7 @@ app.post("/sendmail", (req, res) => {
   apiKey.apiKey = process.env.API_KEY;
   const tranEmailApi = new Sib.TransactionalEmailsApi();
   const sender = {
-    email: "felix.akintola@ivantage.africa",
+    email: email,
   };
 
   const receivers = [
@@ -317,7 +201,7 @@ app.post("/sendmailer", (req, res) => {
   apiKey.apiKey = process.env.API_KEY;
   const tranEmailApi = new Sib.TransactionalEmailsApi();
   const sender = {
-    email: "felix.akintola@ivantage.africa",
+    email: email,
   };
 
   
@@ -351,11 +235,6 @@ app.post("/sendmailer", (req, res) => {
       }
     );
 });
-
-app.get('/adminfilter', async (req,res) =>{
-  const allData = await 0
-  res.render('../views/pages/aminfilter', {allData})
-})
 
 app.use("/api/list", list);
 

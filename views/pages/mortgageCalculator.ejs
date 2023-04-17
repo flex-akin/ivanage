@@ -24,7 +24,6 @@ input:focus {
           
       <div class="row g-3" >
        <h2 style="font-weight: 600;">Mortgage Calculator</h2>
-    
         <div class="col-md-12 col-lg-12 g-5">
           <form id="fSubmit">
         
@@ -159,7 +158,7 @@ input:focus {
 <div class="row">
   <div style="background-color: rgb(246, 248, 248); border: 2px solid white;" class="col-lg-6 col-md-6">
     <h4 style="font-size: 20px;"> <strong>Interest Rate</strong></h4>
-    <h3 class="d-flex flex-row" style="color: #17a2b8;font-size: 25px; font-weight: 500;"> 19%</h3>
+    <h3 class="d-flex flex-row" style="color: #17a2b8;font-size: 25px; font-weight: 500;"> 23%</h3>
 
     
 
@@ -284,7 +283,7 @@ input:focus {
               }
 
               const month = loanTerm * 12
-              const rate = (0.19 / 12)
+              const rate = (0.23 / 12)
               const loanAmount = (payment * ( 1 - Math.pow((1 + rate), (-1 * month))))/rate
               const monthly = loanAmount / month
               const downPay = downPayment()

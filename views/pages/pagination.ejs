@@ -3,7 +3,7 @@
     <script>
         $(document).ready(function () {
           $("#next").on("click", function (event) {
-        const nPage = "<%= pages.nextPage %>"
+        const nPage = "<%= pages.data.nextPage %>"
       
             $.ajax({
               url: `/api/list/lists/${nPage}`,
@@ -11,7 +11,6 @@
               contentType: "application/json",
       
               success: function (res) {
-                console.log(res)
                 $("#team").html(res);
               },
             });
@@ -21,7 +20,7 @@
       <script>
         $(document).ready(function () {
           $("#previuos").on("click", function (event) {
-        const pPage = "<%= pages.prevPage %>"
+        const pPage = "<%= pages.data.previousPage %>"
       
             $.ajax({
               url: `/api/list/lists/${pPage}`,
@@ -38,7 +37,7 @@
       </script>
     
 
-    <%if ( pages.docs.length == 0) { %>
+    <%if ( pages.data.pageDataCount == 0) { %>
       <div class="row">
       <div class="col-lg-4"></div>
       <div class="col-sm-12 col-lg-4">
@@ -56,39 +55,22 @@
       <% } %>
 
     <div class="row">
-  <% for(var i=0; i < pages.docs.length; i++) { %>
+  <% for(var i=0; i < pages.data.pageDataCount; i++) { %>
      
       <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
         <div class="member">
           <div class="member-img">
-            <a href="/show/<%= pages.docs[i].propertyCode %>" style="color: black;">
+            <a href="/show/<%= pages.data.propertyData[i].id %>" style="color: black;">
 
             <div id="carouselExampleIndicators<%= [i] %>" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide-to="1" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide-to="2" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide-to="3" aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide-to="4" aria-label="Slide 4"></button>
+ 
               </div>
               <div class="carousel-inner">
-
                 <div class="carousel-item active">
-                  <img src="https://drive.google.com/uc?export=view&id=<%= pages.docs[i].photos[0] %>" style="height: 450px; width:450px;" alt="...">
+                  <img src="<%= pages.data.propertyData[i].images[0] %>" style="height: 450px; width:450px;" alt="...">
                 </div>
-                <div class="carousel-item">
-                  <img src="https://drive.google.com/uc?export=view&id=<%= pages.docs[i].photos[1] %>" style="height: 450px; width:450px;" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://drive.google.com/uc?export=view&id=<%= pages.docs[i].photos[2] %>" style="height: 450px; width:450px;" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://drive.google.com/uc?export=view&id=<%= pages.docs[i].photos[3] %>" style="height: 450px; width:450px;" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://drive.google.com/uc?export=view&id=<%= pages.docs[i].photos[4] %>" style="height: 450px; width:450px;" alt="...">
-                </div>
-              
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<%= [i] %>" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -98,8 +80,11 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
-            <div class="top-left"><%= pages.docs[i].propertyType %></div>
-            <div class="top-right"><%= pages.docs[i].status %> </div>
+            <div class="top-left"><%= pages.data.propertyData[i].propertyType %></div>
+            <div class="top-right"><%= pages.data.propertyData[i].status %> </div>
+            <div class="bottom-left">Unverified </div>
+
+
 
 
 
@@ -111,7 +96,7 @@
               <h2 id="price<%= [i]%>" class="price">  </h2>
               <script>
 
-                  var x = " <%= pages.docs[i].propertyPrice %> " 
+                  var x = " <%= pages.data.propertyData[i].price %> " 
                 function numberWithCommas(x) {
                  a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                  b = `₦${a}`
@@ -122,13 +107,13 @@
               </script>
               <div  id="icons-block">
               
-                 <i class="fa-solid fa-bed"> <%= pages.docs[i].numberOfBedroom %></i> &nbsp;
-                <i class="fa-solid fa-bath"> <%= pages.docs[i].numberOfBedroom %></i> &nbsp;
+                 <i class="fa-solid fa-bed"> <%= pages.data.propertyData[i].numberOfBedrooms %></i> &nbsp;
+                <i class="fa-solid fa-bath"> <%= pages.data.propertyData[i].numberOfWashrooms%></i> &nbsp;
               </div>
             </div>
 
             <div class="under1">
-              <span> <%= pages.docs[i].propertyName %> </span> &nbsp; &#183; &nbsp; 
+              <span> <%= pages.data.propertyData[i].projectName %> </span> &nbsp; &nbsp; 
   
             </div>
          
@@ -143,26 +128,27 @@
      
         </div
       </div>
+    
       <div>
         <button id="previuos" class="btn btn-warning"> Previous</button>
         
         <button id="next" class="btn btn-success"> Next</button>
-        <strong> <%= pages.page %> of <%= pages.totalPages %> </strong>        
+        <strong> <%= pages.data.page %> of <%= pages.data.totalPages %> </strong>
       </div>
-    
-     
+</section>
+<!-- End Team Section -->
 
 <script>
     
 
-    x = '<%= pages.prevPage %>'
-    y = '<%= pages.nextPage %>'
+    x = '<%= pages.data.previousPage %>'
+    y = '<%= pages.data.nextPage %>'
 
-    if (x == "") {
+    if (x == undefined) {
         but = document.getElementById('previuos')
-    but.style.display = 'none'
+        but.style.display = 'none'
     }
-    if (y == "") {
+    if (y == undefined) {
         but = document.getElementById('next')
     but.style.display = 'none'
     }
@@ -170,9 +156,5 @@
 
    
  </script>
-
-
-
-
 
 

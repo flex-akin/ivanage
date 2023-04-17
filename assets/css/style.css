@@ -1085,6 +1085,13 @@ section {
   position: absolute;
   bottom: 8px;
   left: 16px;
+  background-color: red;
+  opacity: 0.9;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 7px;
+  border-radius: 3px;
 }
 
 /* Top left text */
@@ -1106,7 +1113,7 @@ section {
   position: absolute;
   top: 8px;
   right: 16px;
-  background-color: #24303e;
+  background-color: #10b913;
   opacity: 0.9;
   color: white;
   font-weight: 600;

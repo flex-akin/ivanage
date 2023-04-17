@@ -18,47 +18,45 @@
     
         <div class="row">
   
+<div class="flex flex-row">
+  <h1> 
+    <%= oneData.property.projectName  %>   
+    </h1>  
 
-    <h1> 
-     <%= oneData.propertyName  %>
-     </h1>
+</div>
+<div class="col-lg-4"">
+</div>
 
-         
             </div>
             <div class="row">
       
               <div  id="icons-block">
-                <i class="fa-solid fa-location-dot"></i> <font><%= oneData.state %>, <%= oneData.area %> </font>  &nbsp; &#183; &nbsp;
-                 <i class="fa-solid fa-bed"> </i> <%= oneData.numberOfBedroom %>&nbsp; &#183; &nbsp;
-                <i class="fa-solid fa-bath"> </i> <%= oneData.numberOfWashroom %> &nbsp; &#183; &nbsp;
-                <i class="fa-solid fa-house"> </i> <%= oneData.propertyType%>&nbsp;  &#183; &nbsp;
-                <i class="fa-solid fa-person-digging"></i> <%= oneData.status%>&nbsp;  
+                <i class="fa-solid fa-location-dot"></i> <font><%= oneData.property.state %>, <%= oneData.property.address%> </font>  &nbsp; &#183; &nbsp;
+                 <i class="fa-solid fa-bed"> </i> <%= oneData.property.numberOfBedrooms %>&nbsp; &#183; &nbsp;
+                <i class="fa-solid fa-bath"> </i> <%= oneData.property.numberOfWashrooms %> &nbsp; &#183; &nbsp;
+                <i class="fa-solid fa-house"> </i> <%= oneData.property.propertyType%>&nbsp;  &#183; &nbsp;
+                <i class="fa-solid fa-person-digging"></i> <%= oneData.property.status%>&nbsp;  
+                <font style="color: red;">Unverified</font> &nbsp;  
+                
 
               </div>
             </div>
       </div>
           </section>
-            <div class="conatainer-fluid">
+          <div class="row">
+
+            <div class="container">
             
               <div class="row mx-auto my-auto justify-content-center">
                 <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner row" role="listbox">
-                      <div class="carousel-item active">
-                        <img src="https://drive.google.com/uc?export=view&id=<%= oneData.photos[0] %>" style="height: 450px; width:450px;" alt="...">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="https://drive.google.com/uc?export=view&id=<%= oneData.photos[1] %>" style="height: 450px; width:450px;" alt="...">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="https://drive.google.com/uc?export=view&id=<%= oneData.photos[2] %>" style="height: 450px; width:450px;" alt="...">
+                    
+                      <div class="carousel-item active ">
+                        <% for(var i=0; i<oneData.property.images.length; i++) {%>
+                        <img src="<%= oneData.property.images[i] %>" style="height: 450px; width:450px;" alt="...">
+                        <% } %>
                       </div>
                      
-                      <div class="carousel-item">
-                        <img src="https://drive.google.com/uc?export=view&id=<%= oneData.photos[3] %>" style="height: 450px; width:450px;" alt="...">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="https://drive.google.com/uc?export=view&id=<%= oneData.photos[4] %>" style="height: 450px; width:450px;" alt="...">
-                      </div>
                     </div>
                     <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -69,6 +67,7 @@
                 </div>
               </div>
             </div>
+            </div>
             <br>
             <div class="container">
               <div class="row">
@@ -76,10 +75,10 @@
               </div>
               <div class="row">
                 <h1 id="pricer" style="font-weight: 700;">
-                  ₦<%= oneData.propertyPrice%>
+                  ₦<%= oneData.property.propertyPrice%>
                 </h1>
                 <script>
-                  var x = " <%= oneData.propertyPrice %> " 
+                  var x = " <%= oneData.property.price %> " 
                 function numberWithCommas(x) {
                  a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                  b = `₦${a}`
@@ -148,9 +147,8 @@
     
       </div>
       <script>
-        text = " <%= oneData.propertyFeatures %> "
+        text = " <%= oneData.property.propertyFeatures %> "
         var nameArr = text.split(',');
-        console.log(nameArr)
         var list = document.createElement("ul");
 for (let i of nameArr) {
   let item = document.createElement("li");
@@ -160,7 +158,19 @@ for (let i of nameArr) {
 }
       </script>
   
+  <div class="container" data-aos="fade-up">
+    <hr>
+    
+        <div class="row" >
+         <h2 style="font-weight: 600;">Description</h2>
+         <div style="font-size: 15px;">
+          <%= oneData.property.description %>
+         </div>
 
+        
+        </div>
+    
+      </div>
 
  <section>
  
@@ -314,7 +324,7 @@ for (let i of nameArr) {
   let items = document.querySelectorAll('.carousel .carousel-item')
   
   items.forEach((el) => {
-      const minPerSlide = 4
+      const minPerSlide =1
       let next = el.nextElementSibling
       for (var i=1; i<minPerSlide; i++) {
           if (!next) {

@@ -86,10 +86,10 @@ console.log(minPrice)
 
   const config = {
     method: 'get',
-    url: `https://propertyapi.ivantage.africa/api/ivantage/findproperty?state=${state}&minPrice=${minPrice}&maxPrice=${maxPrice}&propertyType=${propertyType}&numberOfBedroooms=${numberOfBedrooms}&status=${status}
+    url: `https://propertyapi.ivantage.africa/api/ivantage/findproperty?state=${state}&minPrice=${minPrice}&maxPrice=${maxPrice}&propertyType=${propertyType}&numberOfBedrooms=${numberOfBedrooms}&status=${status}
   `,
-    headers: { 'token': 'adebam' ,
-                "companyId" : 1  
+    headers: { 
+      'token': 'adebam'
   },
  
 }

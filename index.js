@@ -16,10 +16,6 @@ app.use(bodyParser.json());
 dotenv.config();
 app.use(cors());
 
-mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () =>
-  console.log("connected to db")
-);
-
 app.get("/", async (req, res) => {
 
   function shuffle(array) {

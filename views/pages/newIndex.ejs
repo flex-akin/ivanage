@@ -194,12 +194,10 @@
            
             <div class="top-left"><%= pages.data.propertyData[i].propertyType %></div>
             <div class="top-right"><%= pages.data.propertyData[i].status %> </div>
-            <div class="bottom-left"> <%= pages.data.propertyData[i].projectStatus %> </div>
-
-
-
-
-
+                <% if (pages.data.propertyData[i].projectStatus == "Verified") { %>
+              <div id="status" class="bottom-left"> <%= pages.data.propertyData[i].projectStatus %> </div>
+              <% } %>
+      
             </div>
           </div>
 
@@ -255,7 +253,6 @@
 
     x =  "<%= pages.data.previousPage %>"
     y =  "<%= pages.data.nextPage %>"
-    console.log("previous", x,y)
     if (x == "") {
         but = document.getElementById('previous')
     but.style.display = 'none'

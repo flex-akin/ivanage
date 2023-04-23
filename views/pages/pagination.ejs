@@ -82,7 +82,9 @@
               </button>
             <div class="top-left"><%= pages.data.propertyData[i].propertyType %></div>
             <div class="top-right"><%= pages.data.propertyData[i].status %> </div>
-            <div class="bottom-left">Unverified </div>
+            <% if (pages.data.propertyData[i].projectStatus == "Verified") { %>
+              <div id="status" class="bottom-left"> <%= pages.data.propertyData[i].projectStatus %> </div>
+              <% } %>
 
 
 

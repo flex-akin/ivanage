@@ -78,27 +78,35 @@ app.get("/filter", async (req, res) => {
   const status = req.query.status
   const numberOfBedrooms = req.query.numberOfBedrooms
 
-console.log(minPrice)
 
   const config = {
     method: 'get',
-    url: `https://propertyapi.ivantage.africa/api/ivantage/findproperty?state=${state}&minPrice=${minPrice}&maxPrice=${maxPrice}&propertyType=${propertyType}&numberOfBedrooms=${numberOfBedrooms}&status=${status}
+    url: `https://propertyapi.ivantage.africa/api/ivantage/findproperties?state=${state}&minPrice=${minPrice}&maxPrice=${maxPrice}&propertyType=${propertyType}&numberOfBedrooms=${numberOfBedrooms}&status=${status}
   `,
     headers: { 
       'token': 'adebam'
+
   },
  
 }
   try{
     const page =  await axios(config)
     const pages = page.data
+    console.log(pages)
   res.render("../views/pages/pagination", { pages });
-
 
     // res.send(pages.data.data.propertyData)
   }
   catch(error){
-    console.log(error.message)
+    var pages = error.response
+    pages.data.nextPage = null
+    pages.data.previousPage = null
+    pages.data.pageDataCount = 0
+    console.log(pages)
+
+
+  res.render("../views/pages/pagination", { pages });
+   
   }
   //res.json(allData)
   // res.send(allData)

@@ -131,7 +131,7 @@
         </div
       </div>
     
-      <div>
+      <div id="pagination">
         <button id="previuos" class="btn btn-warning"> Previous</button>
         
         <button id="next" class="btn btn-success"> Next</button>
@@ -141,6 +141,12 @@
 <!-- End Team Section -->
 
 <script>
+    z = '<%= pages.data.pageDataCount %>'
+    if (z == "0"){
+      page = document.getElementById('pagination')
+      page.style.display = "none"
+
+    }
     
 
     x = '<%= pages.data.previousPage %>'

@@ -7,6 +7,8 @@
 
 
 
+
+
 <script>
   $(document).ready(function () {
     $("#filterSubmit").on("submit", function (event) {
@@ -89,7 +91,7 @@
         
         <div class="col-lg-1 "> 
           <label for="exampleInputPassword1" class="form-label" style="color: white; font-size:13px; font-weight:500; " >State</label><br>
-          <select class="form-select form-select-md mb-3 filter rounded-0" id="slct1" name="state" onchange="populate(this.id,'slct2')">
+          <select class="form-select form-select-md mb-3 filter rounded-0" id="slct1" name="state" >
             <option value="" ></option>
             <option value="Lagos">Lagos</option>
             <option value="Abuja">Abuja</option>
@@ -104,7 +106,7 @@
           <label for="exampleInputPassword1" class="form-label" style="color: white; font-size:13px; font-weight:500; " required>Status</label><br>
           <select class="form-select form-select-md mb-3 filter rounded-0"  id="status" name="status">
             <option value="" ></option>
-            <option value="Off Plan">Off Plan</option>
+            <option value="Off_Plan">Off Plan</option>
             <option value="Completed">Completed</option>
           </select>
         </div>
@@ -153,7 +155,7 @@
   <div class="container" data-aos="fade-up">
     
 
-    <%if ( pages.data.pageDataCount == 0) { %>
+    <%if ( pages.data.message == 'no property found' ) { %>
       <div class="row">
       <div class="col-lg-4"></div>
       <div class="col-sm-12 col-lg-4">
